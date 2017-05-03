@@ -7,9 +7,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:openDrawer="start"
+    android:fitsSystemWindows="true"
     >
 
     <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
@@ -19,15 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 <!--app:layout_scrollFlags="scroll|enterAlways"-->
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                android:background="@color/colorPrimary"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                />
+            <include layout="@layout/toolbar_layout"/>
         </android.support.design.widget.AppBarLayout>
 
         <FrameLayout
@@ -46,17 +40,17 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            app:layout_anchor="@id/frame_layout"
-            app:layout_anchorGravity="bottom|right"
-
+            android:layout_gravity="bottom|end"
+            app:layout_behavior="com.dingmouren.wallpager.utils.MyFABBehavior"
             />
     </android.support.design.widget.CoordinatorLayout>
 
-    <android.support.design.widget.NavigationView
+   <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header_layout"
+        app:menu="@menu/menu_nav"
         />
 </android.support.v4.widget.DrawerLayout>

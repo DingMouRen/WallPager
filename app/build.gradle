@@ -56,4 +56,9 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.1'
     /*圆形图片*/
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    /*要用到详情页*/
+    compile 'com.github.todou:appbarspring:1.0.3'
+    /*取色器*/
+    compile 'com.github.yukuku:ambilwarna:2.0.1'
+    compile 'org.androidannotations:androidannotations:4.2.0'
 }
