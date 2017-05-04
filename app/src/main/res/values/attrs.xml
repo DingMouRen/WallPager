@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--设置界面没有开关的选项-->
+    <declare-styleable name="SettingsBasicTextView">
+        <attr name="settingIcon" format="reference"/>
+        <attr name="settingTitle" format="reference"/>
+        <attr name="settingCaption" format="reference"/>
+    </declare-styleable>
+
+    <!--设置界面哟开关的选项-->
+    <declare-styleable name="SettingsTextViewSwitch">
+        <attr name="settingIcon" />
+        <attr name="settingTitle" />
+        <attr name="settingCaption"/>
+    </declare-styleable>
+</resources>

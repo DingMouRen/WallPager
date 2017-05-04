@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     >
 
     <include layout="@layout/toolbar_layout"/>
@@ -21,8 +20,41 @@
             <!--主题-->
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="256dp"
+                android:layout_height="wrap_content"
                 >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <com.dingmouren.wallpager.widget.SettingsBasicTextView
+                        android:id="@+id/primary_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        app:settingIcon="@drawable/ic_color_lens_black_24dp"
+                        app:settingTitle="@string/settings_primaryColor_title"
+                        app:settingCaption="@string/settings_primaryColor_cation"
+                        />
+                    <com.dingmouren.wallpager.widget.SettingsBasicTextView
+                        android:id="@+id/accent_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        app:settingIcon="@drawable/ic_format_color_fill_black_24dp"
+                        app:settingTitle="@string/settings_accentColor_title"
+                        app:settingCaption="@string/settings_accentColor_cation"
+                        />
+                    <com.dingmouren.wallpager.widget.SettingsTextViewSwitch
+                        android:id="@+id/status_switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        app:settingIcon="@drawable/ic_phone_android_black_24dp"
+                        app:settingTitle="@string/settings_status_trans_title"
+                        app:settingCaption="@string/settings_status_trans_caption"
+                        />
+                </LinearLayout>
             </android.support.v7.widget.CardView>
         </RelativeLayout>
     </ScrollView>

@@ -9,4 +9,11 @@
     <string name="drawer_close">关闭</string>
 
     <string name="settings_title">设置</string>
+    <string name="settings_primaryColor_title">主色调</string>
+    <string name="settings_primaryColor_cation">整个界面所需要的主色调</string>
+    <string name="settings_accentColor_title">重点颜色</string>
+    <string name="settings_accentColor_cation">设置界面的其他组件和细节部分所需使用的次要颜色</string>
+    <string name="settings_status_trans_title">半透明状态栏</string>
+    <string name="settings_status_trans_caption">应用深色主色调的半透明状态栏</string>
+
 </resources>

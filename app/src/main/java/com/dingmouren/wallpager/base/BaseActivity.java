@@ -1,8 +1,23 @@
 package com.dingmouren.wallpager.base;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
+
+import com.dingmouren.wallpager.Constant;
+import com.dingmouren.wallpager.MyApplication;
+import com.dingmouren.wallpager.R;
+import com.dingmouren.wallpager.interfaces.Themeable;
+import com.dingmouren.wallpager.interfaces.UiElementInizializer;
+import com.dingmouren.wallpager.utils.ColorPalette;
+import com.dingmouren.wallpager.utils.SPUtil;
+import com.dingmouren.wallpager.utils.ViewUtil;
 
 import butterknife.ButterKnife;
 
@@ -10,7 +25,8 @@ import butterknife.ButterKnife;
  * Created by dingmouren on 2017/5/2.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements UiElementInizializer{
+    private static final String TAG = BaseActivity.class.getName();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +36,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         initView();
         initListener();
         initData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUiElements();
     }
 
     /**
@@ -47,4 +69,32 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void initData(){}
 
+    /**
+     * 更新组件UI
+     */
+    @Override
+    public void updateUiElements() {
+        for (View view : ViewUtil.getAllChildren(findViewById(android.R.id.content))){
+            if (view instanceof Themeable){
+                ((Themeable)view).refreshTheme();
+            }
+        }
+        updateStatusBarUI();
+    }
+
+    /**
+     * 更改状态栏颜色
+     */
+    public void updateStatusBarUI(){
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            boolean isTranslucentStatusBar = (boolean) SPUtil.get(MyApplication.sContext,Constant.STATUS_TRANSLUCENT,false);
+            int color = (Integer) SPUtil.get(MyApplication.sContext, Constant.COLOR_PRIMARY, getResources().getColor(R.color.md_cyan_A200));
+            if (isTranslucentStatusBar){
+                getWindow().setStatusBarColor(ColorPalette.getObscuredColor(color));
+            }else {
+                getWindow().setStatusBarColor(color);
+            }
+        }
+    }
 }
