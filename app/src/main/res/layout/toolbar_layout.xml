@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.dingmouren.wallpager.widget.ThemeableToolbar
+<com.dingmouren.test.widget.ThemeableToolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
@@ -10,4 +10,4 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-</com.dingmouren.wallpager.widget.ThemeableToolbar>
+</com.dingmouren.test.widget.ThemeableToolbar>

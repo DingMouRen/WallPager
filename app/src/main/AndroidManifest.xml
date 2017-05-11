@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.dingmouren.wallpager">
+          package="com.dingmouren.test">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:name=".MyApplication"
+        android:name=".test.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.home.MainActivity"
+            android:name=".test.ui.MainActivity"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.setting.SettingsActivity"
+            android:name=".test.ui.setting.SettingsActivity"
             />
     </application>
 
