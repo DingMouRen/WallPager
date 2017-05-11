@@ -18,6 +18,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         this.sContext = this;
+        DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build().inject(this);
         JLog.init(this);
         initPrimaryColor();
     }
