@@ -35,7 +35,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
 
-        <com.dingmouren.test.widget.ThemeableFAB
+        <com.dingmouren.wallpager.widget.ThemeableFAB
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
