@@ -8,7 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import com.dingmouren.wallpager.MyApplication;
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.base.BaseFragment;
-import com.dingmouren.wallpager.bean.UnsplashResult;
+import com.dingmouren.wallpager.model.bean.UnsplashResult;
+import com.dingmouren.wallpager.ui.home.dagger.DaggerHomeComponent;
+import com.dingmouren.wallpager.ui.home.dagger.HomeModule;
 
 import java.lang.ref.WeakReference;
 import java.util.List;

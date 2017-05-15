@@ -1,6 +1,8 @@
-package com.dingmouren.wallpager.ui.home;
+package com.dingmouren.wallpager.ui.home.dagger;
 
-import com.dingmouren.wallpager.dagger.scope.PerFragment;
+import com.dingmouren.wallpager.model.GlideImageLoader;
+import com.dingmouren.wallpager.ui.home.HomeContract;
+import com.dingmouren.wallpager.ui.home.HomeFragment;
 
 import dagger.Module;
 import dagger.Provides;
@@ -22,5 +24,7 @@ public class HomeModule {
     public HomeContract.View provideView(){
         return (HomeContract.View) mHomeFragment;
     }
+
+
 
 }

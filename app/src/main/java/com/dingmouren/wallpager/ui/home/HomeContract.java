@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.dingmouren.wallpager.base.BasePresenter;
 import com.dingmouren.wallpager.base.BaseView;
-import com.dingmouren.wallpager.bean.UnsplashResult;
+import com.dingmouren.wallpager.model.bean.UnsplashResult;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.dingmouren.wallpager.bean;
+package com.dingmouren.wallpager.model.bean;
 
 import com.google.gson.Gson;
 

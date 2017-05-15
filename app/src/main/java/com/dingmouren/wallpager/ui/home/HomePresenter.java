@@ -4,7 +4,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
 import com.dingmouren.wallpager.Constant;
-import com.dingmouren.wallpager.bean.UnsplashResult;
+import com.dingmouren.wallpager.model.bean.UnsplashResult;
 import com.dingmouren.wallpager.api.Api;
 
 import java.util.List;

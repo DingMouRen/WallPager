@@ -13,7 +13,7 @@ import com.jiongbull.jlog.JLog;
 public class MyApplication extends Application {
 
     public static Context sContext;
-    private ApplicationComponent mApplicationComponent;
+    private static ApplicationComponent mApplicationComponent;
 
     @Override
     public void onCreate() {

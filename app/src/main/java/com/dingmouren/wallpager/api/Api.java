@@ -1,6 +1,6 @@
 package com.dingmouren.wallpager.api;
 
-import com.dingmouren.wallpager.bean.UnsplashResult;
+import com.dingmouren.wallpager.model.bean.UnsplashResult;
 
 import java.util.List;
 

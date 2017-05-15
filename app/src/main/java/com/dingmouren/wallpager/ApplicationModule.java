@@ -3,6 +3,8 @@ package com.dingmouren.wallpager;
 import android.content.Context;
 
 import com.dingmouren.wallpager.api.Api;
+import com.dingmouren.wallpager.model.GlideImageLoader;
+import com.dingmouren.wallpager.ui.home.dagger.PerFragment;
 import com.jiongbull.jlog.JLog;
 
 import java.util.concurrent.TimeUnit;
@@ -81,5 +83,15 @@ public class ApplicationModule {
     @Singleton
     public Api provideApi(Retrofit retrofit){
         return retrofit.create(Api.class);
+    }
+
+    /**
+     * 提供图片下载类
+     * @return
+     */
+    @Provides
+    @Singleton
+    public GlideImageLoader provideGlideImageLoader(){
+        return new GlideImageLoader();
     }
 }

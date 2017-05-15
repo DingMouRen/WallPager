@@ -12,7 +12,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dingmouren.wallpager.MyApplication;
 import com.dingmouren.wallpager.R;
-import com.dingmouren.wallpager.bean.UnsplashResult;
+import com.dingmouren.wallpager.model.GlideImageLoader;
+import com.dingmouren.wallpager.model.bean.UnsplashResult;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,9 +29,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     private List<UnsplashResult> mList = new LinkedList<>();
+    private GlideImageLoader mGlideImageLoader;
 
     @Inject
-    public HomeAdapter() {
+    public HomeAdapter(GlideImageLoader glideImageLoader) {
+        this.mGlideImageLoader = glideImageLoader;
     }
 
     public void setList(List<UnsplashResult> list){
@@ -70,8 +73,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
         private void bindData(UnsplashResult bean){
             if (bean != null){
-                Glide.with(MyApplication.sContext).load(bean.getUser().getProfile_image().getLarge()).asBitmap().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(authorHeader);
-                Glide.with(MyApplication.sContext).load(bean.getUrls().getThumb()).crossFade().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imgPager);
+                mGlideImageLoader.loadImage(bean.getUser().getProfile_image().getLarge(),authorHeader);
+                mGlideImageLoader.loadImage(bean.getUrls().getRegular(),imgPager);
                 authorName.setText(bean.getUser().getName());
                 authorLocation.setText(bean.getUser().getLocation());
             }
