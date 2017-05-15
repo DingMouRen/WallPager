@@ -96,12 +96,13 @@ public abstract class BaseActivity extends AppCompatActivity implements UiElemen
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             boolean isTranslucentStatusBar = (boolean) SPUtil.get(MyApplication.sContext,Constant.STATUS_TRANSLUCENT,false);
-            int color = (Integer) SPUtil.get(MyApplication.sContext, Constant.COLOR_PRIMARY, getResources().getColor(R.color.md_cyan_A200));
-            if (isTranslucentStatusBar){
-                getWindow().setStatusBarColor(ColorPalette.getObscuredColor(color));
-            }else {
-                getWindow().setStatusBarColor(color);
-            }
+            int color = (Integer) SPUtil.get(MyApplication.sContext, Constant.COLOR_PRIMARY, getResources().getColor(R.color.md_teal_A400));
+            getWindow().setStatusBarColor(color);
+//            if (isTranslucentStatusBar){
+//                getWindow().setStatusBarColor(ColorPalette.getObscuredColor(color));
+//            }else {
+//                getWindow().setStatusBarColor(color);
+//            }
         }
     }
 }

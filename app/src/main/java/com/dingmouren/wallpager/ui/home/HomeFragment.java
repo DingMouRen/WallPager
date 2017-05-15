@@ -66,11 +66,15 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
 
     @Override
     public void initListener() {
-        mHomePresenter.setRefreshListener();//下拉加载下一页，没有上拉加载更多
+        mSwipeRefreshLayout.setOnRefreshListener(()->{
+            HomeFragment.this.setRefresh(true);
+            mHomePresenter.requestData();
+        });
     }
 
     @Override
     public void initData() {
+        setRefresh(true);
         mHomePresenter.requestData();
     }
 
@@ -83,20 +87,12 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
             mHandler.postDelayed(mDelayRunnable,DELAY_TIME_OUT);
     }
 
-    @Override
-    public RecyclerView getRecyclerView() {
-        return mRecyclerView;
-    }
-
-    @Override
-    public SwipeRefreshLayout getSwipeRefreshLayout() {
-        return mSwipeRefreshLayout;
-    }
 
     @Override
     public void setData(List<UnsplashResult> data) {
         mHomeAdapter.setList(data);
         mHomeAdapter.notifyDataSetChanged();
+        setRefresh(false);
     }
 
 

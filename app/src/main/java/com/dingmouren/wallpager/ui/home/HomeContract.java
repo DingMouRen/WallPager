@@ -16,8 +16,6 @@ import java.util.List;
 public interface HomeContract {
 
     interface View extends BaseView{
-        RecyclerView getRecyclerView();
-        SwipeRefreshLayout getSwipeRefreshLayout();
         void setData(List<UnsplashResult> data);
     }
 

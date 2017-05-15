@@ -20,8 +20,6 @@ import rx.schedulers.Schedulers;
 
 public class HomePresenter implements HomeContract.Presenter {
 
-    private RecyclerView mRecyclerView;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
     private HomeContract.View mView;
     private Api mApi;
     private int mPage = 1;
@@ -29,12 +27,9 @@ public class HomePresenter implements HomeContract.Presenter {
     public HomePresenter(HomeContract.View view, Api api){
         this.mApi = api;
         this.mView = view;
-        this.mRecyclerView = view.getRecyclerView();
-        this.mSwipeRefreshLayout = view.getSwipeRefreshLayout();
     }
     @Override
     public void requestData() {
-        mView.setRefresh(true);
         mApi.getPhotos(Constant.UNSPLASH_APP_KEY,mPage,10,Constant.ORDER_BY_POPULAR)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -49,17 +44,6 @@ public class HomePresenter implements HomeContract.Presenter {
         if (data != null) {
             mPage = mPage + 1;
             mView.setData(data);
-            mView.setRefresh(false);
         }
     }
-
-    public void setRefreshListener(){
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                requestData();
-            }
-        });
-    }
-
 }
