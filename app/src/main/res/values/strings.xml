@@ -2,11 +2,14 @@
     <string name="app_name">WallPager</string>
 
     <string name="home_title">壁纸</string>
-    <string name="home">Home</string>
-    <string name="favourite">Favourite</string>
-    <string name="settings">Settings</string>
+    <string name="drawer_home">主页</string>
+    <string name="drawer_favourite">收藏</string>
+    <string name="drawer_settings">设置</string>
+    <string name="drawer_sort">排序</string>
     <string name="drawer_open">打开</string>
     <string name="drawer_close">关闭</string>
+
+    <string name="sort_title">频道排序</string>
 
     <string name="settings_title">设置</string>
     <string name="settings_primaryColor_title">主色调</string>

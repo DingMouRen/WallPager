@@ -3,8 +3,10 @@ package com.dingmouren.wallpager.ui;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +15,7 @@ import android.view.View;
 
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.base.BaseActivity;
+import com.dingmouren.wallpager.ui.channelSort.ChannelManageFragment;
 import com.dingmouren.wallpager.ui.home.HomeFragment;
 import com.dingmouren.wallpager.ui.setting.SettingsActivity;
 
@@ -24,15 +27,20 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
     @BindView(R.id.nav_view) NavigationView mNavigationView;
     @BindView(R.id.coordinator)  CoordinatorLayout mCoordinatorLayout;
+    @BindView(R.id.fab)  FloatingActionButton mFab;
 
 
     private FragmentManager mFragmentManager;
     private ActionBarDrawerToggle mDrawerToggle;
-    private boolean mOpenSettings = false;
+    private int mItemIsChecked ;
+    private HomeFragment mHomeFragment;
+    private ChannelManageFragment mChannelManageFragment;
 
     @Override
     public void init() {
         mFragmentManager = getSupportFragmentManager();
+        mHomeFragment = new HomeFragment();
+        mChannelManageFragment = new ChannelManageFragment();
     }
 
     @Override
@@ -65,12 +73,16 @@ public class MainActivity extends BaseActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()){
                 case R.id.drawer_home:
+                    mItemIsChecked = 0;
+                    break;
+                case R.id.drawer_sort:
+                    mItemIsChecked = 1;
                     break;
                 case R.id.drawer_favourite:
-
+                    mItemIsChecked = 2;
                     break;
                 case R.id.drawer_settings:
-                    mOpenSettings = true;
+                    mItemIsChecked = 3;
                     break;
             }
             item.setChecked(true);
@@ -95,9 +107,26 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public void onDrawerClosed(View drawerView) {
-            if (mOpenSettings){
-                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-                mOpenSettings = false;
+            switch (mItemIsChecked){
+                case 0:
+                    mToolbar.setTitle(getString(R.string.home_title));
+                    FragmentTransaction ft0 =  mFragmentManager.beginTransaction();
+                    ft0.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                    ft0.replace(R.id.frame_layout,mHomeFragment).commit();
+                    mFab.animate().alpha(1).setDuration(800).start();
+                    break;
+                case 1:
+                   mToolbar.setTitle(getResources().getString(R.string.sort_title));
+                    FragmentTransaction ft1 =  mFragmentManager.beginTransaction();
+                    ft1.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                    ft1.replace(R.id.frame_layout,mChannelManageFragment).commit();
+                    mFab.animate().alpha(0).setDuration(800).start();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                    break;
             }
         }
 
