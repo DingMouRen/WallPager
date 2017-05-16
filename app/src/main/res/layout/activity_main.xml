@@ -40,6 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
+            app:fabSize="mini"
+            android:src="@drawable/ic_arrow_upward_black_24dp"
             android:layout_gravity="bottom|right"
             app:layout_behavior="com.dingmouren.wallpager.utils.MyFABBehavior"
             />
