@@ -21,6 +21,7 @@
         </activity>
         <activity
             android:name="com.dingmouren.wallpager.ui.setting.SettingsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
     </application>
 

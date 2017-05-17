@@ -5,8 +5,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+
+import com.dingmouren.wallpager.MyApplication;
 
 /**
  * Created by dingmouren on 2017/5/3.
@@ -50,7 +53,7 @@ public class ScreenUtils {
             Class<?> clazz = Class.forName("com.android.internal.R$dimen");
             Object object = clazz.newInstance();
             int height = Integer.parseInt(clazz.getField("status_bar_height").get(object).toString());
-            statusHeight = context.getResources().getDimensionPixelSize(height);
+            Log.e("status_height",height+"");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

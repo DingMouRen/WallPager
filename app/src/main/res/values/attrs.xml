@@ -13,4 +13,5 @@
         <attr name="settingTitle" />
         <attr name="settingCaption"/>
     </declare-styleable>
+
 </resources>

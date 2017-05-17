@@ -11,10 +11,14 @@ import android.widget.RelativeLayout;
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.base.BaseFragment;
 import com.dingmouren.wallpager.interfaces.ChannelTouchListener;
+import com.dingmouren.wallpager.model.dao.Channel;
 
 import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
+import io.realm.Realm;
+import io.realm.RealmQuery;
 
 /**
  * Created by dingmouren on 2017/5/16.
@@ -23,8 +27,6 @@ import butterknife.BindView;
 public class ChannelManageFragment extends BaseFragment implements ChannelTouchListener{
     private static final String TAG = ChannelManageFragment.class.getName();
     private String[] mChannels = new String[]{"新作","精选","热门","建筑","饮食","自然","物品","人物","科技","星空"};
-    @BindView(R.id.container)
-    RelativeLayout mContainer;
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
 
@@ -53,14 +55,6 @@ public class ChannelManageFragment extends BaseFragment implements ChannelTouchL
         mRecyclerView.setAdapter(mChannelAdapter);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mContainer != null){
-            mContainer.removeAllViews();
-            mContainer = null;
-        }
-    }
 
     @Override
     public void startDrag(RecyclerView.ViewHolder viewHolder) {
@@ -69,6 +63,5 @@ public class ChannelManageFragment extends BaseFragment implements ChannelTouchL
 
     @Override
     public void finishDrag() {
-        Log.e(TAG,mChannelAdapter.getList().toString());
     }
 }
