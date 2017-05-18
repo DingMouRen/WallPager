@@ -1,6 +1,7 @@
 package com.dingmouren.wallpager.model.dao;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by dingmouren on 2017/5/16.
@@ -9,16 +10,7 @@ import io.realm.RealmObject;
 
 public class Channel extends RealmObject {
     private String name;
-    private boolean isFixed;
-    private int index;
 
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
 
     public String getName() {
         return name;
@@ -26,13 +18,5 @@ public class Channel extends RealmObject {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public boolean isFixed() {
-        return isFixed;
-    }
-
-    public void setFixed(boolean fixed) {
-        isFixed = fixed;
     }
 }

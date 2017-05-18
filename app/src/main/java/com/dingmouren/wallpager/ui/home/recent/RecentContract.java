@@ -1,4 +1,4 @@
-package com.dingmouren.wallpager.ui.home;
+package com.dingmouren.wallpager.ui.home.recent;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +13,7 @@ import java.util.List;
  * Created by dingmouren on 2017/5/2.
  */
 
-public interface HomeContract {
+public interface RecentContract {
 
     interface View extends BaseView{
         void setData(List<UnsplashResult> data);

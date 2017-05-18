@@ -19,6 +19,7 @@ import com.dingmouren.wallpager.interfaces.ChannelTouchListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -26,7 +27,8 @@ import java.util.List;
  */
 
 public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.ViewHolder> implements ChannelAdapterDragListener{
-    private List<String> mList = new ArrayList<>();
+    private static final String TAG = ChannelAdapter.class.getName();
+    private List<String> mList = new LinkedList<>();//增删快
     private ChannelTouchListener mTouchListener;
 
     public ChannelAdapter(ChannelTouchListener dragListener) {
@@ -34,7 +36,8 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.ViewHold
     }
 
     public void setList(List<String> list) {
-        mList = list;
+        this.mList.clear();
+        this.mList.addAll(list);
     }
 
     public List<String> getList() {
@@ -60,12 +63,21 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.ViewHold
 
     @Override//拖拽
     public boolean onItemMove(int fromPosition, int toPosition) {
-        Collections.swap(mList,fromPosition,toPosition);//在集合中，交换item位置
+        swap(mList,fromPosition,toPosition);
         notifyItemMoved(fromPosition,toPosition);
         if (mTouchListener != null){
             mTouchListener.finishDrag();
         }
         return true;
+    }
+
+    /**
+     * 根据手势拖动，重新排列集合
+     */
+    private void swap(List<String> list,int fromPosition,int toPosition){
+        String temp = list.get(fromPosition);
+        list.remove(fromPosition);
+        list.add(toPosition,temp);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements ChannelItemSateListener{

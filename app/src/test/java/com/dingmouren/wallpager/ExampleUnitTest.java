@@ -1,9 +1,15 @@
 package com.dingmouren.wallpager;
 
+import com.dingmouren.wallpager.ui.channelSort.ChannelManageFragment;
 import com.dingmouren.wallpager.utils.ScreenUtils;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.robolectric.RuntimeEnvironment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -13,11 +19,4 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
-
-
-    @Test
-    public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
-    }
-
 }

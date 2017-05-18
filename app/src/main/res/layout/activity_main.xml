@@ -9,52 +9,15 @@
     tools:openDrawer="start"
     >
 
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/coordinator"
+    <FrameLayout
+        android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_scrollFlags="scroll|enterAlways"
-                >
-                <com.dingmouren.wallpager.widget.StatusBarView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <include layout="@layout/toolbar_layout"/>
-            </LinearLayout>
+        android:layout_below="@+id/app_bar"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
 
-        </android.support.design.widget.AppBarLayout>
-
-        <FrameLayout
-            android:id="@+id/frame_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/app_bar"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            />
-
-        <com.dingmouren.wallpager.widget.ThemeableFAB
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            app:fabSize="mini"
-            android:src="@drawable/ic_arrow_upward_black_24dp"
-            android:layout_gravity="bottom|right"
-            app:layout_behavior="com.dingmouren.wallpager.utils.MyFABBehavior"
-            />
-    </android.support.design.widget.CoordinatorLayout>
-
-   <android.support.design.widget.NavigationView
+    <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

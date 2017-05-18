@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.dingmouren.wallpager.api.Api;
 import com.dingmouren.wallpager.model.GlideImageLoader;
-import com.dingmouren.wallpager.ui.home.dagger.PerFragment;
 import com.jiongbull.jlog.JLog;
 
 import java.util.concurrent.TimeUnit;

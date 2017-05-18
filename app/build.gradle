@@ -70,4 +70,6 @@ dependencies {
     testCompile "org.mockito:mockito-core:1.10.19"
     testCompile 'org.robolectric:robolectric:3.0'
     testCompile 'com.github.fabioCollini:DaggerMock:0.6.4'
+    /*下拉刷新上拉加载*/
+    compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
 }

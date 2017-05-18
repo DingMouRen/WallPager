@@ -1,4 +1,4 @@
-package com.dingmouren.wallpager.ui.home;
+package com.dingmouren.wallpager.ui.home.recent;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,8 +8,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dingmouren.wallpager.MyApplication;
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.model.GlideImageLoader;
@@ -26,13 +24,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by dingmouren on 2017/5/2.
  */
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
+public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder> {
 
     private List<UnsplashResult> mList = new LinkedList<>();
     private GlideImageLoader mGlideImageLoader;
 
     @Inject
-    public HomeAdapter(GlideImageLoader glideImageLoader) {
+    public RecentAdapter(GlideImageLoader glideImageLoader) {
         this.mGlideImageLoader = glideImageLoader;
     }
 

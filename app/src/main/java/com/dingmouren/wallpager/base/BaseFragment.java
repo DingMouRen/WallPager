@@ -7,13 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dingmouren.wallpager.interfaces.Themeable;
+import com.dingmouren.wallpager.interfaces.UiElementInizializer;
+import com.dingmouren.wallpager.utils.ViewUtil;
+
 import butterknife.ButterKnife;
 
 /**
  * Created by dingmouren on 2017/5/2.
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements UiElementInizializer {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +71,18 @@ public abstract class BaseFragment extends Fragment {
      */
     public void initData(){}
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUiElements();
+    }
 
-
+    @Override
+    public void updateUiElements() {
+        for (View view : ViewUtil.getAllChildren(getActivity().findViewById(android.R.id.content))){
+            if (view instanceof Themeable){
+                ((Themeable)view).refreshTheme();
+            }
+        }
+    }
 }

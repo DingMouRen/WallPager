@@ -6,6 +6,8 @@ import android.content.Context;
 import com.dingmouren.wallpager.utils.SPUtil;
 import com.jiongbull.jlog.JLog;
 
+import io.realm.Realm;
+
 /**
  * Created by dingmouren on 2017/5/2.
  */
@@ -23,6 +25,7 @@ public class MyApplication extends Application {
         mApplicationComponent.inject(this);
         JLog.init(this);
         initPrimaryColor();
+        Realm.init(this);
     }
 
     private void initPrimaryColor() {

@@ -1,53 +1,34 @@
 package com.dingmouren.wallpager.ui;
 
 import android.content.Intent;
-import android.graphics.Rect;
 import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.base.BaseActivity;
 import com.dingmouren.wallpager.ui.channelSort.ChannelManageFragment;
-import com.dingmouren.wallpager.ui.home.HomeFragment;
+import com.dingmouren.wallpager.ui.home.HomePageFragment;
 import com.dingmouren.wallpager.ui.setting.SettingsActivity;
-import com.dingmouren.wallpager.utils.ScreenUtils;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = MainActivity.class.getName();
-    @BindView(R.id.toolbar)  Toolbar mToolbar;
-    @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
-    @BindView(R.id.nav_view) NavigationView mNavigationView;
-    @BindView(R.id.coordinator)  CoordinatorLayout mCoordinatorLayout;
-    @BindView(R.id.fab)  FloatingActionButton mFab;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
+    @BindView(R.id.nav_view)
+    NavigationView mNavigationView;
 
-
-    private FragmentManager mFragmentManager;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private int mItemIsChecked ;
-    private HomeFragment mHomeFragment;
-    private ChannelManageFragment mChannelManageFragment;
-
-    @Override
-    public void init() {
-        mFragmentManager = getSupportFragmentManager();
-        mHomeFragment = new HomeFragment();
-        mChannelManageFragment = new ChannelManageFragment();
-        Log.e(TAG, ScreenUtils.getStatusHeight(this)+"");
-    }
+    private Fragment[] mFragments;
+    private HomePageFragment mHomePageFragment;
+    private int mCurrentTabIndex;
+    private int mIndex;
+    private long mExitTime;
 
     @Override
     public int requestLayout() {
@@ -57,89 +38,87 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        mToolbar.setTitle(getString(R.string.home_title));
-        setSupportActionBar(mToolbar);
-        mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,mToolbar,R.string.drawer_open,R.string.drawer_close);
-        mDrawerToggle.syncState();//将抽屉和toolbar实现联动
-        mFragmentManager.beginTransaction().add(R.id.frame_layout,new HomeFragment()).commit();
+        initFragments();//初始化fragment
+        initNav();//初始化侧滑菜单
+    }
+
+    /**
+     * 初始化fragment
+     */
+    private void initFragments() {
+        mHomePageFragment = HomePageFragment.newInstance();
+        ChannelManageFragment channelManageFragment = ChannelManageFragment.newInstance();
+        mFragments = new Fragment[]{
+                mHomePageFragment,
+                channelManageFragment
+        };
+
+        //显示HomePageFragment
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.frame_layout,mHomePageFragment)
+                .show(mHomePageFragment)
+                .commit();
+    }
+
+    /**
+     * 初始化侧滑菜单
+     */
+    private void initNav() {
+      mNavigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
-    public void initListener() {
-        mNavigationView.setNavigationItemSelectedListener(mOnNavItemSelectedListener);
-        mDrawerLayout.addDrawerListener(mDrawerListener);
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        mDrawerLayout.closeDrawers();
+        switch (item.getItemId()){
+            case R.id.drawer_home:
+                changeFragmentIndex(item,0);
+                return true;
+            case R.id.drawer_sort:
+                changeFragmentIndex(item,1);
+                return true;
+            case R.id.drawer_favourite:
+                return true;
+            case R.id.drawer_settings:
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                return true;
+        }
+        return false;
     }
 
+    /**
+     * 切换Fragment下标
+     */
+    private void changeFragmentIndex(MenuItem item, int index){
+        mIndex = index;
+        switchFragment();
+        item.setChecked(true);
+    }
 
     /**
-     * 抽屉布局中条目选中监听
+     * 切换Fragment
      */
-    private NavigationView.OnNavigationItemSelectedListener mOnNavItemSelectedListener = new NavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()){
-                case R.id.drawer_home:
-                    mItemIsChecked = 0;
-                    break;
-                case R.id.drawer_sort:
-                    mItemIsChecked = 1;
-                    break;
-                case R.id.drawer_favourite:
-                    mItemIsChecked = 2;
-                    break;
-                case R.id.drawer_settings:
-                    mItemIsChecked = 3;
-                    break;
-            }
-            item.setChecked(true);
+    private void switchFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (!mFragments[mIndex].isAdded()){
+            ft.add(R.id.frame_layout,mFragments[mIndex]);
+        }
+        ft.setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .hide(mFragments[mCurrentTabIndex])
+                .show(mFragments[mIndex])
+                .commit();
+        mCurrentTabIndex = mIndex;
+    }
+
+    /**
+     * 侧滑菜单开关
+     */
+    public void toggleDrawer(){
+        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
             mDrawerLayout.closeDrawers();
-            return true;
+        }else {
+            mDrawerLayout.openDrawer(GravityCompat.START);
         }
-    };
-
-    /**
-     * Drawerlayout的状态监听
-     */
-    private DrawerLayout.DrawerListener mDrawerListener = new DrawerLayout.DrawerListener() {
-        @Override
-        public void onDrawerSlide(View drawerView, float slideOffset) {
-
-        }
-
-        @Override
-        public void onDrawerOpened(View drawerView) {
-
-        }
-
-        @Override
-        public void onDrawerClosed(View drawerView) {
-            switch (mItemIsChecked){
-                case 0:
-                    mToolbar.setTitle(getString(R.string.home_title));
-                    FragmentTransaction ft0 =  mFragmentManager.beginTransaction();
-                    ft0.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                    ft0.replace(R.id.frame_layout,mHomeFragment).commit();
-                    mFab.animate().alpha(1).setDuration(800).start();
-                    break;
-                case 1:
-                   mToolbar.setTitle(getResources().getString(R.string.sort_title));
-                    FragmentTransaction ft1 =  mFragmentManager.beginTransaction();
-                    ft1.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                    ft1.replace(R.id.frame_layout,mChannelManageFragment).commit();
-                    mFab.animate().alpha(0).setDuration(800).start();
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-                    break;
-            }
-        }
-
-        @Override
-        public void onDrawerStateChanged(int newState) {
-
-        }
-    };
-
+    }
 }
