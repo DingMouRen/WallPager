@@ -16,6 +16,7 @@
             android:id="@+id/img_pager"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:background="@color/md_light_appbar"
             />
         <!--作者信息-->
         <RelativeLayout
