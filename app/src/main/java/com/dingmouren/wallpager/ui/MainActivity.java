@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.base.BaseActivity;
@@ -75,13 +76,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.drawer_home:
                 changeFragmentIndex(item,0);
                 return true;
-            case R.id.drawer_sort:
-                changeFragmentIndex(item,1);
-                return true;
+//            case R.id.drawer_sort:
+//                changeFragmentIndex(item,1);
+//                return true;
             case R.id.drawer_favourite:
                 return true;
             case R.id.drawer_settings:
-                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                startActivity(new Intent(MainActivity.this,SettingsActivity.class));
                 return true;
         }
         return false;

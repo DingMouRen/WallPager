@@ -4,26 +4,29 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import io.realm.RealmObject;
+
 /**
  * Created by dingmouren on 2017/5/2.
  */
 
-public class UnsplashResult {
+public class UnsplashResult{
+
 
     /**
-     * id : Lm5rkxzgiFQ
-     * created_at : 2017-04-30T18:15:19-04:00
-     * updated_at : 2017-05-01T21:26:19-04:00
-     * width : 3984
-     * height : 5976
-     * color : #0C0A08
-     * likes : 145
+     * id : xIFbDeGcy44
+     * created_at : 2016-08-15T05:40:38-04:00
+     * updated_at : 2017-05-18T23:26:36-04:00
+     * width : 5760
+     * height : 3840
+     * color : #E5E1DE
+     * likes : 191
      * liked_by_user : false
-     * user : {"id":"Q9Ig7Srx2OI","updated_at":"2017-05-01T21:27:53-04:00","username":"reddangelo16","name":"Redd Angelo","first_name":"Redd","last_name":"Angelo","portfolio_url":"https://www.instagram.com/reddangelo/","bio":"Edmonton Based Photographer. 21 . Graphic and Web Designer by trade.","location":"Edmonton, Alberta","total_likes":132,"total_photos":222,"total_collections":0,"profile_image":{"small":"https://images.unsplash.com/profile-1484189708643-d31cffb5e906?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32&s=58fbaab52f4533ddb08523e709fe4ff0","medium":"https://images.unsplash.com/profile-1484189708643-d31cffb5e906?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=64&w=64&s=91cb79af71fba3b28b4098eab7e44b1f","large":"https://images.unsplash.com/profile-1484189708643-d31cffb5e906?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=ea44860ec6c87a601ea2c048b3721e8f"},"links":{"self":"https://api.unsplash.com/users/reddangelo16","html":"http://unsplash.com/@reddangelo16","photos":"https://api.unsplash.com/users/reddangelo16/photos","likes":"https://api.unsplash.com/users/reddangelo16/likes","portfolio":"https://api.unsplash.com/users/reddangelo16/portfolio","following":"https://api.unsplash.com/users/reddangelo16/following","followers":"https://api.unsplash.com/users/reddangelo16/followers"}}
+     * user : {"id":"4nD5SIrywGs","updated_at":"2017-05-19T02:07:23-04:00","username":"stefanjonhson","name":"Stefan Johnson","first_name":"Stefan","last_name":"Johnson","portfolio_url":"http://stefanjohnson.co.uk/","bio":"London based food, drink and editorial photographer. Shooting out of Clapham Studio in Battersea, London, I have worked with some of the UKs leading chefs, brands and magazines.","location":"London ","total_likes":0,"total_photos":5,"total_collections":0,"profile_image":{"small":"https://images.unsplash.com/profile-fb-1471253165-7350e1314fde.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32&s=1e06cd2892ca62b5d51b51f79d55e5bd","medium":"https://images.unsplash.com/profile-fb-1471253165-7350e1314fde.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=64&w=64&s=38cc7f45342357ee168312a25a9cb8fd","large":"https://images.unsplash.com/profile-fb-1471253165-7350e1314fde.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=cc874b863f22fcd377f9b5e5efe8a3d8"},"links":{"self":"https://api.unsplash.com/users/stefanjonhson","html":"http://unsplash.com/@stefanjonhson","photos":"https://api.unsplash.com/users/stefanjonhson/photos","likes":"https://api.unsplash.com/users/stefanjonhson/likes","portfolio":"https://api.unsplash.com/users/stefanjonhson/portfolio","following":"https://api.unsplash.com/users/stefanjonhson/following","followers":"https://api.unsplash.com/users/stefanjonhson/followers"}}
      * current_user_collections : []
-     * urls : {"raw":"https://images.unsplash.com/photo-1493589976221-c2357c31ad77","full":"https://images.unsplash.com/photo-1493589976221-c2357c31ad77?ixlib=rb-0.3.5&q=100&fm=jpg&crop=entropy&cs=tinysrgb&s=0575ba7f39eda11006574833ffab3ffa","regular":"https://images.unsplash.com/photo-1493589976221-c2357c31ad77?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=d60792004dbbb366e08c4187d068a9b2","small":"https://images.unsplash.com/photo-1493589976221-c2357c31ad77?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&s=994acc8d9fc11878ebd80a3642d15a83","thumb":"https://images.unsplash.com/photo-1493589976221-c2357c31ad77?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=f3a323d94512e483b895f53ec418b8eb"}
-     * categories : []
-     * links : {"self":"https://api.unsplash.com/photos/Lm5rkxzgiFQ","html":"http://unsplash.com/photos/Lm5rkxzgiFQ","download":"http://unsplash.com/photos/Lm5rkxzgiFQ/download","download_location":"https://api.unsplash.com/photos/Lm5rkxzgiFQ/download"}
+     * urls : {"raw":"https://images.unsplash.com/photo-1471253794676-0f039a6aae9d","full":"https://images.unsplash.com/photo-1471253794676-0f039a6aae9d?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&s=fe50060f79c731863365a3c076aec395","regular":"https://images.unsplash.com/photo-1471253794676-0f039a6aae9d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=fc659a55688c3107eb638fc9f3136567","small":"https://images.unsplash.com/photo-1471253794676-0f039a6aae9d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&s=8607235745340a1826c3560df5328ccb","thumb":"https://images.unsplash.com/photo-1471253794676-0f039a6aae9d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=2c68e8e2387b616fade02085d48f26aa"}
+     * categories : [{"id":3,"title":"Food & Drink","photo_count":3124,"links":{"self":"https://api.unsplash.com/categories/3","photos":"https://api.unsplash.com/categories/3/photos"}}]
+     * links : {"self":"https://api.unsplash.com/photos/xIFbDeGcy44","html":"http://unsplash.com/photos/xIFbDeGcy44","download":"http://unsplash.com/photos/xIFbDeGcy44/download","download_location":"https://api.unsplash.com/photos/xIFbDeGcy44/download"}
      */
 
     private String id;
@@ -37,8 +40,8 @@ public class UnsplashResult {
     private User user;
     private Urls urls;
     private LinksX links;
-    private List<?> current_user_collections;
-    private List<?> categories;
+//    private List<?> current_user_collections;
+    private List<Categories> categories;
 
     public static UnsplashResult objectFromData(String str) {
 
@@ -133,38 +136,38 @@ public class UnsplashResult {
         this.links = links;
     }
 
-    public List<?> getCurrent_user_collections() {
-        return current_user_collections;
-    }
+//    public List<?> getCurrent_user_collections() {
+//        return current_user_collections;
+//    }
+//
+//    public void setCurrent_user_collections(List<?> current_user_collections) {
+//        this.current_user_collections = current_user_collections;
+//    }
 
-    public void setCurrent_user_collections(List<?> current_user_collections) {
-        this.current_user_collections = current_user_collections;
-    }
-
-    public List<?> getCategories() {
+    public List<Categories> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<?> categories) {
+    public void setCategories(List<Categories> categories) {
         this.categories = categories;
     }
 
-    public static class User {
+    public static class User{
         /**
-         * id : Q9Ig7Srx2OI
-         * updated_at : 2017-05-01T21:27:53-04:00
-         * username : reddangelo16
-         * name : Redd Angelo
-         * first_name : Redd
-         * last_name : Angelo
-         * portfolio_url : https://www.instagram.com/reddangelo/
-         * bio : Edmonton Based Photographer. 21 . Graphic and Web Designer by trade.
-         * location : Edmonton, Alberta
-         * total_likes : 132
-         * total_photos : 222
+         * id : 4nD5SIrywGs
+         * updated_at : 2017-05-19T02:07:23-04:00
+         * username : stefanjonhson
+         * name : Stefan Johnson
+         * first_name : Stefan
+         * last_name : Johnson
+         * portfolio_url : http://stefanjohnson.co.uk/
+         * bio : London based food, drink and editorial photographer. Shooting out of Clapham Studio in Battersea, London, I have worked with some of the UKs leading chefs, brands and magazines.
+         * location : London
+         * total_likes : 0
+         * total_photos : 5
          * total_collections : 0
-         * profile_image : {"small":"https://images.unsplash.com/profile-1484189708643-d31cffb5e906?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32&s=58fbaab52f4533ddb08523e709fe4ff0","medium":"https://images.unsplash.com/profile-1484189708643-d31cffb5e906?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=64&w=64&s=91cb79af71fba3b28b4098eab7e44b1f","large":"https://images.unsplash.com/profile-1484189708643-d31cffb5e906?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=ea44860ec6c87a601ea2c048b3721e8f"}
-         * links : {"self":"https://api.unsplash.com/users/reddangelo16","html":"http://unsplash.com/@reddangelo16","photos":"https://api.unsplash.com/users/reddangelo16/photos","likes":"https://api.unsplash.com/users/reddangelo16/likes","portfolio":"https://api.unsplash.com/users/reddangelo16/portfolio","following":"https://api.unsplash.com/users/reddangelo16/following","followers":"https://api.unsplash.com/users/reddangelo16/followers"}
+         * profile_image : {"small":"https://images.unsplash.com/profile-fb-1471253165-7350e1314fde.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32&s=1e06cd2892ca62b5d51b51f79d55e5bd","medium":"https://images.unsplash.com/profile-fb-1471253165-7350e1314fde.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=64&w=64&s=38cc7f45342357ee168312a25a9cb8fd","large":"https://images.unsplash.com/profile-fb-1471253165-7350e1314fde.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=cc874b863f22fcd377f9b5e5efe8a3d8"}
+         * links : {"self":"https://api.unsplash.com/users/stefanjonhson","html":"http://unsplash.com/@stefanjonhson","photos":"https://api.unsplash.com/users/stefanjonhson/photos","likes":"https://api.unsplash.com/users/stefanjonhson/likes","portfolio":"https://api.unsplash.com/users/stefanjonhson/portfolio","following":"https://api.unsplash.com/users/stefanjonhson/following","followers":"https://api.unsplash.com/users/stefanjonhson/followers"}
          */
 
         private String id;
@@ -301,9 +304,9 @@ public class UnsplashResult {
 
         public static class ProfileImage {
             /**
-             * small : https://images.unsplash.com/profile-1484189708643-d31cffb5e906?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32&s=58fbaab52f4533ddb08523e709fe4ff0
-             * medium : https://images.unsplash.com/profile-1484189708643-d31cffb5e906?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=64&w=64&s=91cb79af71fba3b28b4098eab7e44b1f
-             * large : https://images.unsplash.com/profile-1484189708643-d31cffb5e906?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=ea44860ec6c87a601ea2c048b3721e8f
+             * small : https://images.unsplash.com/profile-fb-1471253165-7350e1314fde.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32&s=1e06cd2892ca62b5d51b51f79d55e5bd
+             * medium : https://images.unsplash.com/profile-fb-1471253165-7350e1314fde.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=64&w=64&s=38cc7f45342357ee168312a25a9cb8fd
+             * large : https://images.unsplash.com/profile-fb-1471253165-7350e1314fde.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=cc874b863f22fcd377f9b5e5efe8a3d8
              */
 
             private String small;
@@ -340,15 +343,15 @@ public class UnsplashResult {
             }
         }
 
-        public static class Links {
+        public static class Links{
             /**
-             * self : https://api.unsplash.com/users/reddangelo16
-             * html : http://unsplash.com/@reddangelo16
-             * photos : https://api.unsplash.com/users/reddangelo16/photos
-             * likes : https://api.unsplash.com/users/reddangelo16/likes
-             * portfolio : https://api.unsplash.com/users/reddangelo16/portfolio
-             * following : https://api.unsplash.com/users/reddangelo16/following
-             * followers : https://api.unsplash.com/users/reddangelo16/followers
+             * self : https://api.unsplash.com/users/stefanjonhson
+             * html : http://unsplash.com/@stefanjonhson
+             * photos : https://api.unsplash.com/users/stefanjonhson/photos
+             * likes : https://api.unsplash.com/users/stefanjonhson/likes
+             * portfolio : https://api.unsplash.com/users/stefanjonhson/portfolio
+             * following : https://api.unsplash.com/users/stefanjonhson/following
+             * followers : https://api.unsplash.com/users/stefanjonhson/followers
              */
 
             private String self;
@@ -424,11 +427,11 @@ public class UnsplashResult {
 
     public static class Urls {
         /**
-         * raw : https://images.unsplash.com/photo-1493589976221-c2357c31ad77
-         * full : https://images.unsplash.com/photo-1493589976221-c2357c31ad77?ixlib=rb-0.3.5&q=100&fm=jpg&crop=entropy&cs=tinysrgb&s=0575ba7f39eda11006574833ffab3ffa
-         * regular : https://images.unsplash.com/photo-1493589976221-c2357c31ad77?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=d60792004dbbb366e08c4187d068a9b2
-         * small : https://images.unsplash.com/photo-1493589976221-c2357c31ad77?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&s=994acc8d9fc11878ebd80a3642d15a83
-         * thumb : https://images.unsplash.com/photo-1493589976221-c2357c31ad77?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=f3a323d94512e483b895f53ec418b8eb
+         * raw : https://images.unsplash.com/photo-1471253794676-0f039a6aae9d
+         * full : https://images.unsplash.com/photo-1471253794676-0f039a6aae9d?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&s=fe50060f79c731863365a3c076aec395
+         * regular : https://images.unsplash.com/photo-1471253794676-0f039a6aae9d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=fc659a55688c3107eb638fc9f3136567
+         * small : https://images.unsplash.com/photo-1471253794676-0f039a6aae9d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&s=8607235745340a1826c3560df5328ccb
+         * thumb : https://images.unsplash.com/photo-1471253794676-0f039a6aae9d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=2c68e8e2387b616fade02085d48f26aa
          */
 
         private String raw;
@@ -485,10 +488,10 @@ public class UnsplashResult {
 
     public static class LinksX {
         /**
-         * self : https://api.unsplash.com/photos/Lm5rkxzgiFQ
-         * html : http://unsplash.com/photos/Lm5rkxzgiFQ
-         * download : http://unsplash.com/photos/Lm5rkxzgiFQ/download
-         * download_location : https://api.unsplash.com/photos/Lm5rkxzgiFQ/download
+         * self : https://api.unsplash.com/photos/xIFbDeGcy44
+         * html : http://unsplash.com/photos/xIFbDeGcy44
+         * download : http://unsplash.com/photos/xIFbDeGcy44/download
+         * download_location : https://api.unsplash.com/photos/xIFbDeGcy44/download
          */
 
         private String self;
@@ -531,6 +534,88 @@ public class UnsplashResult {
 
         public void setDownload_location(String download_location) {
             this.download_location = download_location;
+        }
+    }
+
+    public static class Categories{
+        /**
+         * id : 3
+         * title : Food & Drink
+         * photo_count : 3124
+         * links : {"self":"https://api.unsplash.com/categories/3","photos":"https://api.unsplash.com/categories/3/photos"}
+         */
+
+        private int id;
+        private String title;
+        private int photo_count;
+        private LinksXX links;
+
+        public static Categories objectFromData(String str) {
+
+            return new Gson().fromJson(str, Categories.class);
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public int getPhoto_count() {
+            return photo_count;
+        }
+
+        public void setPhoto_count(int photo_count) {
+            this.photo_count = photo_count;
+        }
+
+        public LinksXX getLinks() {
+            return links;
+        }
+
+        public void setLinks(LinksXX links) {
+            this.links = links;
+        }
+
+        public static class LinksXX{
+            /**
+             * self : https://api.unsplash.com/categories/3
+             * photos : https://api.unsplash.com/categories/3/photos
+             */
+
+            private String self;
+            private String photos;
+
+            public static LinksXX objectFromData(String str) {
+
+                return new Gson().fromJson(str, LinksXX.class);
+            }
+
+            public String getSelf() {
+                return self;
+            }
+
+            public void setSelf(String self) {
+                this.self = self;
+            }
+
+            public String getPhotos() {
+                return photos;
+            }
+
+            public void setPhotos(String photos) {
+                this.photos = photos;
+            }
         }
     }
 }

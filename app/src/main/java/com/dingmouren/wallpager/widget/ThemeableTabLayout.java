@@ -1,6 +1,7 @@
 package com.dingmouren.wallpager.widget;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.icu.text.DateFormat;
 import android.support.design.widget.TabLayout;
 import android.util.AttributeSet;
@@ -32,18 +33,6 @@ public class ThemeableTabLayout extends TabLayout implements Themeable{
 
     @Override
     public void refreshTheme() {
-
-        Class tabLayoutClass = this.getClass();
-        try {
-            Field filed = tabLayoutClass.getDeclaredField("mTabBackgroundResId");
-            filed.setAccessible(true);//设置属性可以访问
-            Object object = filed.get(this);
-            filed.set(this,(Integer) SPUtil.get(MyApplication.sContext, Constant.COLOR_PRIMARY, R.color.md_cyan_A200));
-            invalidate();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        setBackgroundColor((Integer) SPUtil.get(MyApplication.sContext, Constant.COLOR_PRIMARY, R.color.md_cyan_A200));
     }
 }

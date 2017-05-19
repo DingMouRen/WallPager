@@ -1,5 +1,6 @@
 package com.dingmouren.wallpager.ui.home.recent;
 
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.dingmouren.wallpager.MyApplication;
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.model.GlideImageLoader;
@@ -71,8 +75,8 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
 
         private void bindData(UnsplashResult bean){
             if (bean != null){
-                mGlideImageLoader.loadImage(bean.getUser().getProfile_image().getLarge(),authorHeader);
-                mGlideImageLoader.loadImage(bean.getUrls().getRegular(),imgPager);
+                mGlideImageLoader.loadImage(bean.getUser().getProfile_image().getMedium(),R.drawable.user_icon,authorHeader);
+                mGlideImageLoader.loadAutoImage(bean.getUrls().getRegular(),R.mipmap.photo_hodler,imgPager);
                 authorName.setText(bean.getUser().getName());
                 authorLocation.setText(bean.getUser().getLocation());
             }

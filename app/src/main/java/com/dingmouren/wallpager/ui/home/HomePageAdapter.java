@@ -4,51 +4,64 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.dingmouren.wallpager.Constant;
+import com.dingmouren.wallpager.base.BaseFragment;
+import com.dingmouren.wallpager.model.dao.Channel;
 import com.dingmouren.wallpager.ui.home.recent.RecentFragment;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by dingmouren on 2017/5/18.
  */
 
 public class HomePageAdapter extends FragmentPagerAdapter {
+    private static final String TAG = HomePageAdapter.class.getName();
+    private List<Channel> mChannelList = new ArrayList<>();
+    private List<RecentFragment> mFragments = new ArrayList<>();
 
-    private String[] channelStr = new String[]{"新作","精选","建筑","饮食","自然","物品","人物","科技"};
     public HomePageAdapter(FragmentManager fm) {
         super(fm);
+        init();
+    }
+
+    public void init() {
+        for (int i = 0; i < Constant.DEFAULT_CHANNELS.length; i++) {
+            Channel channel = new Channel();
+            channel.setName(Constant.DEFAULT_CHANNELS[i]);
+            channel.setId(i + 101);
+            mChannelList.add(channel);
+        }
+        mFragments.clear();
+        for (int i = 0; i < mChannelList.size(); i++) {
+            mFragments.add(RecentFragment.newInstance(mChannelList.get(i).getId()));
+        }
     }
 
     @Override
     public Fragment getItem(int position) {
-        switch (position){
-            case 0:
-                return RecentFragment.newInstance(101);
-            case 1:
-                return RecentFragment.newInstance(102);
-            case 2:
-                return RecentFragment.newInstance(103);
-            case 3:
-                return RecentFragment.newInstance(104);
-            case 4:
-                return RecentFragment.newInstance(105);
-            case 5:
-                return RecentFragment.newInstance(106);
-            case 6:
-                return RecentFragment.newInstance(107);
-            case 7:
-                return RecentFragment.newInstance(108);
 
-        }
-        return null;
+        return mFragments.get(position);
     }
 
     @Override
     public int getCount() {
-        return channelStr.length;
+        return mChannelList.size();
     }
+
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return channelStr[position];
+        return mChannelList.get(position).getName();
     }
 }

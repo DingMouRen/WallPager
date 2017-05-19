@@ -43,7 +43,11 @@ public class ApplicationModule {
     @Provides
     @Singleton
     public HttpLoggingInterceptor provideHttpLoggingInterceptor(){
-        return new HttpLoggingInterceptor(message -> JLog.json(message)).setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> {
+           JLog.json(message);
+        }).setLevel(HttpLoggingInterceptor.Level.BODY);
+        return loggingInterceptor;
     }
 
     /**

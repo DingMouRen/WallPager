@@ -9,8 +9,26 @@ import io.realm.annotations.PrimaryKey;
  */
 
 public class Channel extends RealmObject {
-    private String name;
+    private int sort_id;
 
+    public int getSort_id() {
+        return sort_id;
+    }
+
+    public void setSort_id(int sort_id) {
+        this.sort_id = sort_id;
+    }
+
+    private String name;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

@@ -5,9 +5,9 @@
               android:checked="true"
               android:icon="@drawable/ic_home"
               android:title="@string/drawer_home"/>
-        <item android:id="@+id/drawer_sort"
+      <!--  <item android:id="@+id/drawer_sort"
               android:icon="@drawable/ic_sort"
-              android:title="@string/drawer_sort"/>
+              android:title="@string/drawer_sort"/>-->
         <item
             android:id="@+id/drawer_favourite"
             android:icon="@drawable/ic_fav"

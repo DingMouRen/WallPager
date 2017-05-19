@@ -4,10 +4,14 @@ import com.dingmouren.wallpager.Constant;
 import com.dingmouren.wallpager.model.bean.UnsplashResult;
 import com.dingmouren.wallpager.api.Api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import io.realm.Realm;
+import io.realm.RealmObject;
+import io.realm.RealmResults;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -96,4 +100,5 @@ public class RecentPresenter implements RecentContract.Presenter {
             mView.setData(data);
         }
     }
+
 }

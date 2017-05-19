@@ -27,7 +27,7 @@ import butterknife.BindView;
 public class RecentFragment extends BaseFragment implements RecentContract.View{
 
     private static final int DELAY_TIME_OUT = 1500;
-    private static final String CATEGOTY_NUM = "categoty_num";
+    private static final String CATEGOTY_NUM = "categoty_id";
     @BindView(R.id.recycler) RecyclerView mRecyclerView;
     @BindView(R.id.swipe_refresh)SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -37,7 +37,7 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
     RecentAdapter mHomeAdapter;
     @Inject
     RecentPresenter mRecentPresenter;
-    private  int mCategoty;
+    private    int mCategotyId;
 
 
     public static RecentFragment newInstance(int category){
@@ -51,7 +51,7 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
     @Override
     public void init() {
         if (getArguments() != null){
-            mCategoty = getArguments().getInt(CATEGOTY_NUM);
+            mCategotyId = getArguments().getInt(CATEGOTY_NUM);
         }
         mHandler = new Handler();
         mDelayRunnable = new DelayRunnable(this);
@@ -88,7 +88,7 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
     @Override
     public void initData() {
         setRefresh(true);
-        mRecentPresenter.setCategory(mCategoty);
+        mRecentPresenter.setCategory(mCategotyId);
         mRecentPresenter.requestData();
     }
 
@@ -107,6 +107,11 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
         mHomeAdapter.setList(data);
         mHomeAdapter.notifyDataSetChanged();
         setRefresh(false);
+    }
+
+    @Override
+    public int getCategoryId() {
+        return this.mCategotyId;
     }
 
 

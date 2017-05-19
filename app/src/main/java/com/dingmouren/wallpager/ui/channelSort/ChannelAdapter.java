@@ -16,6 +16,7 @@ import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.interfaces.ChannelAdapterDragListener;
 import com.dingmouren.wallpager.interfaces.ChannelItemSateListener;
 import com.dingmouren.wallpager.interfaces.ChannelTouchListener;
+import com.dingmouren.wallpager.model.dao.Channel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,19 +29,19 @@ import java.util.List;
 
 public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.ViewHolder> implements ChannelAdapterDragListener{
     private static final String TAG = ChannelAdapter.class.getName();
-    private List<String> mList = new LinkedList<>();//增删快
+    private List<Channel> mList = new LinkedList<>();//增删快
     private ChannelTouchListener mTouchListener;
 
     public ChannelAdapter(ChannelTouchListener dragListener) {
         mTouchListener = dragListener;
     }
 
-    public void setList(List<String> list) {
+    public void setList(List<Channel> list) {
         this.mList.clear();
         this.mList.addAll(list);
     }
 
-    public List<String> getList() {
+    public List<Channel> getList() {
         return mList;
     }
 
@@ -52,7 +53,7 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bindData(mList.get(position));
+        holder.bindData(mList.get(position).getName());
         holder.setTouchListener();//设置触摸监听
     }
 
@@ -74,8 +75,8 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.ViewHold
     /**
      * 根据手势拖动，重新排列集合
      */
-    private void swap(List<String> list,int fromPosition,int toPosition){
-        String temp = list.get(fromPosition);
+    private void swap(List<Channel> list,int fromPosition,int toPosition){
+        Channel temp = list.get(fromPosition);
         list.remove(fromPosition);
         list.add(toPosition,temp);
     }

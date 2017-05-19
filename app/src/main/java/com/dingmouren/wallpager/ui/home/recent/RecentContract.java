@@ -17,6 +17,7 @@ public interface RecentContract {
 
     interface View extends BaseView{
         void setData(List<UnsplashResult> data);
+        int getCategoryId();
     }
 
     interface Presenter extends BasePresenter{

@@ -2,9 +2,15 @@ package com.dingmouren.wallpager;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
+import com.dingmouren.wallpager.model.dao.Channel;
+import com.dingmouren.wallpager.utils.MyFABBehavior;
 import com.dingmouren.wallpager.utils.SPUtil;
 import com.jiongbull.jlog.JLog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 
@@ -13,6 +19,7 @@ import io.realm.Realm;
  */
 
 public class MyApplication extends Application {
+    private static final String TAG = MyApplication.class.getName();
 
     public static Context sContext;
     private static ApplicationComponent mApplicationComponent;
@@ -20,12 +27,12 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Realm.init(this);
         this.sContext = this;
         mApplicationComponent = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
         mApplicationComponent.inject(this);
         JLog.init(this);
         initPrimaryColor();
-        Realm.init(this);
     }
 
     private void initPrimaryColor() {
@@ -42,4 +49,5 @@ public class MyApplication extends Application {
     public ApplicationComponent getApplicationComponent() {
         return mApplicationComponent;
     }
+
 }
