@@ -23,6 +23,8 @@
             android:name="com.dingmouren.wallpager.ui.setting.SettingsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
+        <activity android:name=".ui.photodetail.PhotoDetailActivity"
+            />
     </application>
 
 </manifest>

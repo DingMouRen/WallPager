@@ -1,10 +1,12 @@
 package com.dingmouren.wallpager.api;
 
+import com.dingmouren.wallpager.model.bean.PhotoInfo;
 import com.dingmouren.wallpager.model.bean.UnsplashResult;
 
 import java.util.List;
 
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -44,5 +46,10 @@ public interface Api {
     //108 科技https://api.unsplash.com/categories/7/photos?client_id=eb54e3b9dc12b9e0862b028b646085355d20b3442fbdfca4633ca0f7b01ef9a6&page=1&per_page=15
     @GET("categories/7/photos")
     Observable<List<UnsplashResult>> getTechnologyPhotos(@Query("client_id") String clientId,@Query("page") int page, @Query("per_page") int per_page);
+
+    //照片的信息
+    @GET("photos/{id}")
+    Observable<PhotoInfo> getPhotoInfo(@Path("id") String id,@Query("client_id") String clientId);
+
 
 }

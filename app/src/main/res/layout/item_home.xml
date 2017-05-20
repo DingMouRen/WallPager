@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="@dimen/activity_horizontal_margin"
     app:cardCornerRadius="0dp"
     app:cardElevation="5dp"
     >
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,46 +18,49 @@
             android:id="@+id/img_pager"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="@color/md_light_appbar"
             />
         <!--作者信息-->
         <RelativeLayout
             android:id="@+id/author_info"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
             android:background="@android:color/transparent"
-           android:layout_alignParentBottom="true"
             >
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/author_header"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:padding="5dp"
                 />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/author_header"
                 android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/author_header"
                 >
+
                 <TextView
                     android:id="@+id/author_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="11dp"
-                    android:textSize="12sp"
                     android:textColor="@android:color/white"
+                    android:textSize="12sp"
                     />
+
                 <TextView
                     android:id="@+id/author_location"
-                    android:layout_toRightOf="@+id/author_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:textSize="12sp"
-                    android:singleLine="true"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_toRightOf="@+id/author_name"
+                    android:singleLine="true"
                     android:textColor="@android:color/white"
+                    android:textSize="12sp"
                     />
             </RelativeLayout>
         </RelativeLayout>

@@ -20,7 +20,6 @@ import javax.inject.Inject;
  */
 
 public class GlideImageLoader implements InterfaceImgLoad {
-
     @Override
     public void loadImage(@NonNull String url,int holderImg, @NonNull ImageView imageView) {
         Glide.with(MyApplication.sContext).load(url)
@@ -56,8 +55,8 @@ public class GlideImageLoader implements InterfaceImgLoad {
                         return false;
                     }
                 })
-//                .placeholder(holderImg)
-//                .error(holderImg)
+                .placeholder(holderImg)
+                .error(holderImg)
                 .into(imageView);
     }
 

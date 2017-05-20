@@ -1,7 +1,10 @@
 package com.dingmouren.wallpager.model.bean;
 
+import android.os.Parcelable;
+
 import com.google.gson.Gson;
 
+import java.io.Serializable;
 import java.util.List;
 
 import io.realm.RealmObject;
@@ -10,7 +13,7 @@ import io.realm.RealmObject;
  * Created by dingmouren on 2017/5/2.
  */
 
-public class UnsplashResult{
+public class UnsplashResult implements Serializable{
 
 
     /**
@@ -152,7 +155,7 @@ public class UnsplashResult{
         this.categories = categories;
     }
 
-    public static class User{
+    public static class User implements Serializable{
         /**
          * id : 4nD5SIrywGs
          * updated_at : 2017-05-19T02:07:23-04:00
@@ -302,7 +305,7 @@ public class UnsplashResult{
             this.links = links;
         }
 
-        public static class ProfileImage {
+        public static class ProfileImage  implements Serializable{
             /**
              * small : https://images.unsplash.com/profile-fb-1471253165-7350e1314fde.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32&s=1e06cd2892ca62b5d51b51f79d55e5bd
              * medium : https://images.unsplash.com/profile-fb-1471253165-7350e1314fde.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=64&w=64&s=38cc7f45342357ee168312a25a9cb8fd
@@ -343,7 +346,7 @@ public class UnsplashResult{
             }
         }
 
-        public static class Links{
+        public static class Links implements Serializable{
             /**
              * self : https://api.unsplash.com/users/stefanjonhson
              * html : http://unsplash.com/@stefanjonhson
@@ -425,7 +428,7 @@ public class UnsplashResult{
         }
     }
 
-    public static class Urls {
+    public static class Urls implements Serializable {
         /**
          * raw : https://images.unsplash.com/photo-1471253794676-0f039a6aae9d
          * full : https://images.unsplash.com/photo-1471253794676-0f039a6aae9d?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&s=fe50060f79c731863365a3c076aec395
@@ -486,7 +489,7 @@ public class UnsplashResult{
         }
     }
 
-    public static class LinksX {
+    public static class LinksX implements Serializable {
         /**
          * self : https://api.unsplash.com/photos/xIFbDeGcy44
          * html : http://unsplash.com/photos/xIFbDeGcy44
@@ -537,7 +540,7 @@ public class UnsplashResult{
         }
     }
 
-    public static class Categories{
+    public static class Categories implements Serializable{
         /**
          * id : 3
          * title : Food & Drink
@@ -587,7 +590,7 @@ public class UnsplashResult{
             this.links = links;
         }
 
-        public static class LinksXX{
+        public static class LinksXX implements Serializable{
             /**
              * self : https://api.unsplash.com/categories/3
              * photos : https://api.unsplash.com/categories/3/photos

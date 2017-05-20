@@ -72,4 +72,6 @@ dependencies {
     testCompile 'com.github.fabioCollini:DaggerMock:0.6.4'
     /*下拉刷新上拉加载*/
     compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
+    /*百分比布局*/
+    compile 'com.android.support:percent:25.3.1'
 }
