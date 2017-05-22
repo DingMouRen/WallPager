@@ -39,4 +39,5 @@ public class PhotoDetailPresenter implements PhotoInfoContract.Presenter {
             mView.setData(photoInfo);
         }
     }
+
 }

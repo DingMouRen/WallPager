@@ -1,5 +1,7 @@
 package com.dingmouren.wallpager;
 
+import android.os.Environment;
+
 /**
  * Created by dingmouren on 2017/5/2.
  */
@@ -11,11 +13,9 @@ public class Constant {
     public static final String ORDER_BY_LATEST = "latest";//最新的
     public static final int NUM_PER_PAGE = 15;
     public static final String[] DEFAULT_CHANNELS = new String[]{"新作","精选","建筑","饮食","自然","物品","人物","科技"};
-
     //Theme
     public static final String COLOR_ACCENT = "color_accent";
     public static final String COLOR_PRIMARY = "color_primary";
-    public static final String COLOR_PRIMARY_DARK = "color_primary_dark";
     public static final String STATUS_TRANSLUCENT = "status_translucent";
 
 }

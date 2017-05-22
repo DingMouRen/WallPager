@@ -1,19 +1,21 @@
 package com.dingmouren.wallpager.ui.photodetail;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dingmouren.wallpager.Constant;
 import com.dingmouren.wallpager.R;
-import com.dingmouren.wallpager.api.Api;
 import com.dingmouren.wallpager.base.BaseFragment;
 import com.dingmouren.wallpager.model.GlideImageLoader;
 import com.dingmouren.wallpager.model.bean.PhotoInfo;
 import com.dingmouren.wallpager.model.bean.UnsplashResult;
-import com.dingmouren.wallpager.utils.DateUtils;
-
-import javax.inject.Inject;
+import com.dingmouren.wallpager.service.PhotoLoadService;
 
 import butterknife.BindView;
 
@@ -56,6 +58,7 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
         if (getArguments() != null){
             mUnsplashResult = (UnsplashResult) getArguments().getSerializable(UNSPLASH_RESULT);
         }
+
     }
 
     @Override
@@ -75,12 +78,20 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
     @Override
     public void initListener() {
         mImgArrowBack.setOnClickListener(v -> getActivity().onBackPressed());
+        mTvLoadPhoto.setOnClickListener(v -> {
+            getActivity().startService(PhotoLoadService.newIntent(getContext(),mUnsplashResult.getUrls().getRaw(),mUnsplashResult.getId()));
+        });
     }
 
     @Override
     public void initData() {
         mPhotoDetailPresenter = new PhotoDetailPresenter(mUnsplashResult.getId(),(PhotoInfoContract.View) this);
         mPhotoDetailPresenter.requestData();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 
     @Override
@@ -101,8 +112,10 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
         mTvPhotoIso.setText("曝光 : "+(photoInfo.getExif().getIso() == 0 ? "未知":photoInfo.getExif().getIso()));
     }
 
+
     @Override
     public void setRefresh(boolean refresh) {
 
     }
+
 }

@@ -74,4 +74,6 @@ dependencies {
     compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
     /*百分比布局*/
     compile 'com.android.support:percent:25.3.1'
+    /*eventbus*/
+    compile 'org.greenrobot:eventbus:3.0.0'
 }
