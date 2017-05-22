@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,10 +13,15 @@ import android.widget.TextView;
 import com.dingmouren.wallpager.Constant;
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.base.BaseFragment;
+import com.dingmouren.wallpager.event.LoadPhotoEvent;
 import com.dingmouren.wallpager.model.GlideImageLoader;
 import com.dingmouren.wallpager.model.bean.PhotoInfo;
 import com.dingmouren.wallpager.model.bean.UnsplashResult;
 import com.dingmouren.wallpager.service.PhotoLoadService;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 
@@ -44,6 +50,7 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
     private UnsplashResult mUnsplashResult;
     private GlideImageLoader mGlideImageLoader;
     private PhotoDetailPresenter mPhotoDetailPresenter;
+    private LoadPhotoNotification mLoadPhotoNotification;
     public static PhotoDetailFragment newInstance(UnsplashResult unsplashResult){
         PhotoDetailFragment fragment = new PhotoDetailFragment();
         Bundle bundle = new Bundle();
@@ -58,7 +65,7 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
         if (getArguments() != null){
             mUnsplashResult = (UnsplashResult) getArguments().getSerializable(UNSPLASH_RESULT);
         }
-
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -70,7 +77,7 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
     @Override
     public void initView() {
         mGlideImageLoader.loadAutoImage(mUnsplashResult.getUrls().getRegular(),0,mPhoto);
-        mGlideImageLoader.loadImage(mUnsplashResult.getUser().getProfile_image().getLarge(),0,mAuthorHeader);
+        mGlideImageLoader.loadImage(mUnsplashResult.getUser().getProfile_image().getSmall(),0,mAuthorHeader);
         mAuthorName.setText(mUnsplashResult.getUser().getName());
         mCreatedTime.setText("拍摄于 "+ mUnsplashResult.getCreated_at());
     }
@@ -92,6 +99,7 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -115,6 +123,24 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
 
     @Override
     public void setRefresh(boolean refresh) {
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    public void updateLoadProgress(LoadPhotoEvent event){
+
+        if (event == null) return;
+        if (mLoadPhotoNotification == null){
+            mLoadPhotoNotification = new LoadPhotoNotification();
+            Snackbar.make(mPhoto,R.string.load_photo_start,Snackbar.LENGTH_SHORT).show();
+        }
+        int progress = event.getProgress();
+        if (progress >= 99){
+            mLoadPhotoNotification.clearNotification();
+            Snackbar.make(mPhoto,R.string.load_photo_complete,Snackbar.LENGTH_SHORT).show();
+        }else {
+            mLoadPhotoNotification.updateProgress(event.getProgress());
+        }
 
     }
 

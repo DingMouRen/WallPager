@@ -15,6 +15,11 @@ import android.widget.Toast;
 import com.dingmouren.wallpager.Constant;
 import com.dingmouren.wallpager.MyApplication;
 import com.dingmouren.wallpager.R;
+import com.dingmouren.wallpager.event.LoadPhotoEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -35,6 +40,7 @@ public class PhotoLoadService extends IntentService {
     private static final String ACTION = "com.dingmouren.wallpager.intentservice.loadphoto";
     private static final String PHOTO_LOAD_URL = "photo_load_url";
     private static final String PHOTO_ID = "photo_id";
+    private LoadPhotoEvent mLoadPhotoEvent;
     public static Intent newIntent(Context context,String downUrl,String photoId){
         Intent intent = new Intent(context,PhotoLoadService.class);
         intent.setAction(ACTION);
@@ -44,6 +50,15 @@ public class PhotoLoadService extends IntentService {
     }
     public PhotoLoadService() {
         super(TAG);
+        EventBus.getDefault().register(this);
+        mLoadPhotoEvent = new LoadPhotoEvent();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -71,6 +86,8 @@ public class PhotoLoadService extends IntentService {
                 byte[] buffer = new byte[1024];
                 while((length = is.read(buffer))!= -1){
                     progress+= length;
+                    mLoadPhotoEvent.setProgress(progress * 100 / contentLength);
+                    EventBus.getDefault().postSticky(mLoadPhotoEvent);//发送事件,更新UI
                     if (contentLength == 0){
                     }else {
                     }
@@ -102,7 +119,6 @@ public class PhotoLoadService extends IntentService {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
             fos.close();
-            Toast.makeText(MyApplication.sContext,"图片保存在"+photoDir.getAbsolutePath(),Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -117,5 +133,10 @@ public class PhotoLoadService extends IntentService {
         }
         // 最后通知图库更新
         MyApplication.sContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + photoDir.getAbsolutePath())));
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void doNothing(LoadPhotoEvent event){
+
     }
 }

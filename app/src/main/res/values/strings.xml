@@ -19,7 +19,8 @@
     <string name="settings_status_trans_title">半透明状态栏</string>
     <string name="settings_status_trans_caption">应用深色主色调的半透明状态栏</string>
 
-    <string name="load_photo_start">图片在后台下载中，你现在可以干点别的</string>
-    <string name="photo_save_path">图片保存在</string>
+    <string name="load_photo_start">图片开始下载</string>
+    <string name="load_photo_complete">图片下载完成</string>
+    <string name="notification_title">图片正在下载中</string>
 
 </resources>

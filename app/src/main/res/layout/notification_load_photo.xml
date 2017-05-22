@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/md_grey_300"
+    >
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_notification"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        />
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_toRightOf="@+id/img"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_toLeftOf="@+id/tv_progress"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+       android:progressDrawable="@drawable/load_photo_progressbar"
+        />
+    <TextView
+        android:id="@+id/tv_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/md_teal_A700"
+        android:text="88%"
+        />
+</RelativeLayout>
