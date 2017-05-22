@@ -47,7 +47,7 @@ public interface Api {
     @GET("categories/7/photos")
     Observable<List<UnsplashResult>> getTechnologyPhotos(@Query("client_id") String clientId,@Query("page") int page, @Query("per_page") int per_page);
 
-    //照片的信息
+    //照片的信息 https://api.unsplash.com/photos/oCbrjDECdK0?client_id=eb54e3b9dc12b9e0862b028b646085355d20b3442fbdfca4633ca0f7b01ef9a6
     @GET("photos/{id}")
     Observable<PhotoInfo> getPhotoInfo(@Path("id") String id,@Query("client_id") String clientId);
 

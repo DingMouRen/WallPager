@@ -138,8 +138,9 @@
             android:id="@+id/divide"
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/md_dark_dividers"
+            android:background="@color/md_grey_300"
             android:layout_below="@+id/rela_function"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
             />
         <!--照片的属性-->
         <LinearLayout
@@ -151,12 +152,50 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             >
             <TextView
-                android:id="@+id/tv_attr1"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                android:text="分辨率 500 x 500"
-                android:textSize="15sp"
+                android:text="照片属性"
+                android:textSize="20sp"
+                android:clickable="true"
+                android:background="@drawable/ripple"
                 android:gravity="center_vertical"
+                android:textColor="@color/md_grey_700"
+                />
+            <TextView
+                android:id="@+id/tv_attr_size"
+                style="@style/PhotoAttrTextViewStyle"
+                android:text="分辨率 500 x 500"
+                android:drawableLeft="@drawable/ic_size"
+                />
+            <TextView
+                android:id="@+id/tv_attr_exposure"
+                style="@style/PhotoAttrTextViewStyle"
+                android:text="快门时间：1/4000"
+                android:drawableLeft="@drawable/ic_exposure"
+                />
+            <TextView
+                android:id="@+id/tv_attr_aperture"
+                style="@style/PhotoAttrTextViewStyle"
+                android:text="光圈：2.8"
+                android:drawableLeft="@drawable/ic_aperture"
+                />
+            <TextView
+                android:id="@+id/tv_attr_focal"
+                style="@style/PhotoAttrTextViewStyle"
+                android:text="焦距：24"
+                android:drawableLeft="@drawable/ic_focal"
+                />
+            <TextView
+                android:id="@+id/tv_attr_model"
+                style="@style/PhotoAttrTextViewStyle"
+                android:text="器材：NIKON D610"
+                android:drawableLeft="@drawable/ic_model"
+                />
+            <TextView
+                android:id="@+id/tv_attr_iso"
+                style="@style/PhotoAttrTextViewStyle"
+                android:text="曝光：1600"
+                android:drawableLeft="@drawable/ic_iso"
                 />
         </LinearLayout>
     </RelativeLayout>

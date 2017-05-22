@@ -30,6 +30,15 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
     @BindView(R.id.img_author_header) ImageView mAuthorHeader;
     @BindView(R.id.tv_author) TextView mAuthorName;
     @BindView(R.id.tv_time) TextView mCreatedTime;
+    @BindView(R.id.tv_load_photo) TextView mTvLoadPhoto;
+    @BindView(R.id.tv_share) TextView mTvShare;
+    @BindView(R.id.tv_set_phone_page) TextView mTvSetPhotoPage;
+    @BindView(R.id.tv_attr_size) TextView mTvPhotoSize;
+    @BindView(R.id.tv_attr_exposure) TextView mTvPhotoExposure;//快门
+    @BindView(R.id.tv_attr_aperture) TextView mTvPhotoAperture;//光圈
+    @BindView(R.id.tv_attr_focal) TextView mTvPhotoFocal;//焦距
+    @BindView(R.id.tv_attr_model) TextView mTvPhotoModel;//器材
+    @BindView(R.id.tv_attr_iso) TextView mTvPhotoIso;//曝光
     private UnsplashResult mUnsplashResult;
     private GlideImageLoader mGlideImageLoader;
     private PhotoDetailPresenter mPhotoDetailPresenter;
@@ -61,7 +70,6 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
         mGlideImageLoader.loadImage(mUnsplashResult.getUser().getProfile_image().getLarge(),0,mAuthorHeader);
         mAuthorName.setText(mUnsplashResult.getUser().getName());
         mCreatedTime.setText("拍摄于 "+ mUnsplashResult.getCreated_at());
-
     }
 
     @Override
@@ -77,7 +85,20 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
 
     @Override
     public void setData(PhotoInfo photoInfo) {
-        Log.e(TAG,photoInfo.toString());
+       showPhotoAttr(photoInfo);
+    }
+
+    /**
+     * 显示照片属性
+     * @param photoInfo
+     */
+    private void showPhotoAttr(PhotoInfo photoInfo) {
+        mTvPhotoSize.setText("分辨率 : "+photoInfo.getWidth()+" / "+ photoInfo.getHeight());
+        mTvPhotoExposure.setText("快门 : "+(photoInfo.getExif().getExposure_time() == null ? "未知":photoInfo.getExif().getExposure_time()));
+        mTvPhotoAperture.setText("光圈 : "+(photoInfo.getExif().getAperture() == null ? "未知":photoInfo.getExif().getAperture()));
+        mTvPhotoFocal.setText("焦距 : "+ (photoInfo.getExif().getFocal_length() == null ? "未知" : photoInfo.getExif().getFocal_length()));
+        mTvPhotoModel.setText("器材 : " + (photoInfo.getExif().getModel() == null ? "未知" :photoInfo.getExif().getModel()) );
+        mTvPhotoIso.setText("曝光 : "+(photoInfo.getExif().getIso() == 0 ? "未知":photoInfo.getExif().getIso()));
     }
 
     @Override
