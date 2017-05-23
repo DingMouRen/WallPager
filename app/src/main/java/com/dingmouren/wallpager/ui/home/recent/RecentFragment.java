@@ -83,7 +83,7 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
     @Override
     public void initListener() {
         mRecyclerView.addOnScrollListener(mOnScrollListener);
-        mFab.setOnClickListener(v -> mRecyclerView.scrollToPosition(0));
+        mFab.setOnClickListener(v -> mRecyclerView.smoothScrollToPosition(0));
     }
 
     @Override

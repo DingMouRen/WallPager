@@ -72,7 +72,6 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
             authorHeader = (CircleImageView) itemView.findViewById(R.id.author_header);
             authorName = (TextView) itemView.findViewById(R.id.author_name);
             authorLocation = (TextView) itemView.findViewById(R.id.author_location);
-            Log.e(TAG,"下载图片的是否是单例："+mGlideImageLoader.hashCode());
         }
 
         private void bindData(UnsplashResult bean){

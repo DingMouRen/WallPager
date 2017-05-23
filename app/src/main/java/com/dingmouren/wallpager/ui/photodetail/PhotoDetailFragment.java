@@ -99,7 +99,7 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
         mTvLoadPhoto.setOnClickListener(v -> {
             getActivity().startService(PhotoLoadService.newIntent(getContext(),mUnsplashResult.getUrls().getRaw(),mUnsplashResult.getId()));
         });
-        mTvSetPhotoPage.setOnClickListener(v -> {
+        mTvSetPhotoPage.setOnClickListener(v -> {//设置为壁纸
            mPhotoDetailPresenter.setWallPager();
         });
     }

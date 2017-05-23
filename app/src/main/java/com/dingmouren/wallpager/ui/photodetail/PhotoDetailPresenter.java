@@ -15,6 +15,7 @@ import com.dingmouren.wallpager.utils.ScreenUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -61,6 +62,7 @@ public class PhotoDetailPresenter implements PhotoInfoContract.Presenter {
     public void setWallPager() {
         new SetWallPagerTask().execute(mPhotoUrl);
     }
+
 
     class SetWallPagerTask extends AsyncTask<String,Void,Integer>{
 

@@ -149,9 +149,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         switch (mDrawerSelectedItem){
             case 101://图片已下载
                 startActivity(new Intent(MainActivity.this,PhotosLoadedActivity.class));
+                mDrawerSelectedItem = -1;
                 break;
             case 110://设置
                 startActivity(new Intent(MainActivity.this,SettingsActivity.class));
+                mDrawerSelectedItem = -1;
                 break;
         }
     }
