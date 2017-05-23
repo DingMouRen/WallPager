@@ -3,6 +3,7 @@ package com.dingmouren.wallpager.ui.photodetail;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.dingmouren.wallpager.Constant;
@@ -14,6 +15,7 @@ import com.dingmouren.wallpager.R;
  */
 
 public class LoadPhotoNotification extends Notification {
+    private static final String TAG = LoadPhotoNotification.class.getName();
     private NotificationManager mNotificationManager;
     private RemoteViews mRemoteViews;
     private Notification mNotification;

@@ -27,5 +27,4 @@
         >
         <include layout="@layout/detail_photo_layout"/>
     </android.support.v4.widget.NestedScrollView>
-
 </android.support.design.widget.CoordinatorLayout>

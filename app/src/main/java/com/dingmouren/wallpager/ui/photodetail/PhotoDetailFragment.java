@@ -1,16 +1,13 @@
 package com.dingmouren.wallpager.ui.photodetail;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.dingmouren.wallpager.Constant;
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.base.BaseFragment;
 import com.dingmouren.wallpager.event.LoadPhotoEvent;
@@ -47,10 +44,10 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
     @BindView(R.id.tv_attr_focal) TextView mTvPhotoFocal;//焦距
     @BindView(R.id.tv_attr_model) TextView mTvPhotoModel;//器材
     @BindView(R.id.tv_attr_iso) TextView mTvPhotoIso;//曝光
+    @BindView(R.id.progressbar)  ProgressBar mProgressBar;
     private UnsplashResult mUnsplashResult;
     private GlideImageLoader mGlideImageLoader;
     private PhotoDetailPresenter mPhotoDetailPresenter;
-    private LoadPhotoNotification mLoadPhotoNotification;
     public static PhotoDetailFragment newInstance(UnsplashResult unsplashResult){
         PhotoDetailFragment fragment = new PhotoDetailFragment();
         Bundle bundle = new Bundle();
@@ -77,7 +74,7 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
     @Override
     public void initView() {
         mGlideImageLoader.loadAutoImage(mUnsplashResult.getUrls().getRegular(),0,mPhoto);
-        mGlideImageLoader.loadImage(mUnsplashResult.getUser().getProfile_image().getSmall(),0,mAuthorHeader);
+        mGlideImageLoader.loadImage(mUnsplashResult.getUser().getProfile_image().getLarge(),0,mAuthorHeader);
         mAuthorName.setText(mUnsplashResult.getUser().getName());
         mCreatedTime.setText("拍摄于 "+ mUnsplashResult.getCreated_at());
     }
@@ -128,20 +125,19 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
 
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void updateLoadProgress(LoadPhotoEvent event){
-
         if (event == null) return;
-        if (mLoadPhotoNotification == null){
-            mLoadPhotoNotification = new LoadPhotoNotification();
-            Snackbar.make(mPhoto,R.string.load_photo_start,Snackbar.LENGTH_SHORT).show();
+        mProgressBar.animate()
+                .alpha(1)
+                .setDuration(300)
+                .start();
+        mProgressBar.setProgress(event.getProgress());
+        if (event.getProgress() == 100){
+            mProgressBar.animate()
+                    .alpha(0)
+                    .setDuration(800)
+                    .start();
+            Snackbar.make(mAuthorHeader,"图片下载完成",Snackbar.LENGTH_SHORT).show();
         }
-        int progress = event.getProgress();
-        if (progress >= 99){
-            mLoadPhotoNotification.clearNotification();
-            Snackbar.make(mPhoto,R.string.load_photo_complete,Snackbar.LENGTH_SHORT).show();
-        }else {
-            mLoadPhotoNotification.updateProgress(event.getProgress());
-        }
-
     }
 
 }

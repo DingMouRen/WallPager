@@ -55,6 +55,7 @@
                 android:id="@+id/img_author_header"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:padding="1px"
                 android:src="@drawable/imgtest"
                 />
         </android.support.v7.widget.CardView>
@@ -133,15 +134,31 @@
                 android:text="设置壁纸"
                 app:layout_widthPercent="33%"
                 />
+
         </android.support.percent.PercentRelativeLayout>
+        <!--进度条-->
+            <ProgressBar
+                android:id="@+id/progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:progressDrawable="@drawable/load_photo_progressbar"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_below="@+id/rela_function"
+                android:alpha="0"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:max="100"/>
+
         <View
             android:id="@+id/divide"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/md_grey_300"
-            android:layout_below="@+id/rela_function"
+            android:layout_below="@+id/progressbar"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
             />
+
         <!--照片的属性-->
         <LinearLayout
             android:id="@+id/linear_photo_attr"
