@@ -38,7 +38,7 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
     }
 
     public void setList(List<UnsplashResult> list){
-        mList.addAll(0,list);
+        mList.addAll(list);
     }
 
     @Override

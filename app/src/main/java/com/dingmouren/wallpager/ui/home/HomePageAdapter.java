@@ -25,7 +25,7 @@ import io.realm.RealmResults;
  * Created by dingmouren on 2017/5/18.
  */
 
-public class HomePageAdapter extends FragmentPagerAdapter {
+public class HomePageAdapter extends FragmentStatePagerAdapter {
     private static final String TAG = HomePageAdapter.class.getName();
     private List<Channel> mChannelList = new ArrayList<>();
     private List<RecentFragment> mFragments = new ArrayList<>();

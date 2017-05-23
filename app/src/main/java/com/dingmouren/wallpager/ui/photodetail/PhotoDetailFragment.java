@@ -1,19 +1,25 @@
 package com.dingmouren.wallpager.ui.photodetail;
 
+import android.app.Dialog;
 import android.app.WallpaperManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.dingmouren.wallpager.MyApplication;
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.base.BaseFragment;
 import com.dingmouren.wallpager.event.LoadPhotoEvent;
@@ -37,6 +43,7 @@ import butterknife.BindView;
 public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContract.View{
     private static final String TAG = PhotoDetailFragment.class.getName();
     private static final String UNSPLASH_RESULT = "unsplash_result";
+    @BindView(R.id.container) CoordinatorLayout mContanier;
     @BindView(R.id.img_photo) ImageView mPhoto;
     @BindView(R.id.img_arrow_back) ImageView mImgArrowBack;
     @BindView(R.id.img_author_header) ImageView mAuthorHeader;
@@ -55,7 +62,6 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
     private UnsplashResult mUnsplashResult;
     private GlideImageLoader mGlideImageLoader;
     private PhotoDetailPresenter mPhotoDetailPresenter;
-    private WallpaperManager mWallpaperManager;
     public static PhotoDetailFragment newInstance(UnsplashResult unsplashResult){
         PhotoDetailFragment fragment = new PhotoDetailFragment();
         Bundle bundle = new Bundle();
@@ -66,7 +72,6 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
 
     @Override
     public void init() {
-        mWallpaperManager = WallpaperManager.getInstance(getContext());
         mGlideImageLoader = new GlideImageLoader();
         if (getArguments() != null){
             mUnsplashResult = (UnsplashResult) getArguments().getSerializable(UNSPLASH_RESULT);
@@ -95,13 +100,13 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
             getActivity().startService(PhotoLoadService.newIntent(getContext(),mUnsplashResult.getUrls().getRaw(),mUnsplashResult.getId()));
         });
         mTvSetPhotoPage.setOnClickListener(v -> {
-            setWallPager();
+           mPhotoDetailPresenter.setWallPager();
         });
     }
 
     @Override
     public void initData() {
-        mPhotoDetailPresenter = new PhotoDetailPresenter(mUnsplashResult.getId(),(PhotoInfoContract.View) this);
+        mPhotoDetailPresenter = new PhotoDetailPresenter(mUnsplashResult.getId(),(PhotoInfoContract.View) this,mUnsplashResult.getUrls().getRaw());
         mPhotoDetailPresenter.requestData();
     }
 
@@ -109,11 +114,31 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+        if (mContanier != null){
+            mContanier.removeAllViews();
+            mContanier = null;
+        }
     }
 
     @Override
     public void setData(PhotoInfo photoInfo) {
        showPhotoAttr(photoInfo);
+    }
+
+    @Override
+    public void setWappPagerStart() {
+        Toast.makeText(MyApplication.sContext,"设置手机壁纸中...",Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void setWallPagerSuccess() {
+        Toast.makeText(MyApplication.sContext,"手机壁纸设置成功",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setWallPagerFail() {
+        Toast.makeText(MyApplication.sContext,"手机壁纸设置失败",Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -151,27 +176,4 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
             Snackbar.make(mAuthorHeader,"图片下载完成",Snackbar.LENGTH_SHORT).show();
         }
     }
-
-
-    private void setWallPager() {
-        Glide.with(this)
-                .load(mUnsplashResult.getUrls().getRaw())
-                .asBitmap()
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-
-                        if (resource != null){
-                            try {
-                                mWallpaperManager.setBitmap(resource);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                    }
-                });
-    }
-
-
 }

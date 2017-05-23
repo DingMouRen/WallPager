@@ -1,6 +1,7 @@
 package com.dingmouren.wallpager.model;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
@@ -64,6 +65,8 @@ public class GlideImageLoader implements InterfaceImgLoad {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                         if (resource != null){
+                            BitmapFactory.Options options = new BitmapFactory.Options();
+                            options.inJustDecodeBounds = true;
                             imageView.setImageBitmap(resource);
                         }
                     }

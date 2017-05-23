@@ -2,6 +2,7 @@ package com.dingmouren.wallpager.ui.home.recent;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +31,7 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
     private static final String CATEGOTY_NUM = "categoty_id";
     @BindView(R.id.recycler) RecyclerView mRecyclerView;
     @BindView(R.id.swipe_refresh)SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.fab) FloatingActionButton mFab;
 
     private Handler mHandler;
     private DelayRunnable mDelayRunnable;
@@ -37,8 +39,8 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
     RecentAdapter mHomeAdapter;
     @Inject
     RecentPresenter mRecentPresenter;
-    private    int mCategotyId;
-
+    private int mCategotyId;
+    private LinearLayoutManager mLinearLayoutManager;
 
     public static RecentFragment newInstance(int category){
         RecentFragment fragment = new RecentFragment();
@@ -64,7 +66,8 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
 
     @Override
     public void initView() {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(MyApplication.sContext));
+        mLinearLayoutManager = new LinearLayoutManager(MyApplication.sContext);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mHomeAdapter);
     }
@@ -79,10 +82,8 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
 
     @Override
     public void initListener() {
-        mSwipeRefreshLayout.setOnRefreshListener(()->{
-            RecentFragment.this.setRefresh(true);
-            mRecentPresenter.requestData();
-        });
+        mRecyclerView.addOnScrollListener(mOnScrollListener);
+        mFab.setOnClickListener(v -> mRecyclerView.scrollToPosition(0));
     }
 
     @Override
@@ -131,4 +132,16 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
            }
        }
    }
+
+    private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            if (newState == RecyclerView.SCROLL_STATE_IDLE && mLinearLayoutManager.getItemCount() > 1){
+                int lastIndex = mLinearLayoutManager.findLastVisibleItemPosition();
+                if (lastIndex + 1 == mLinearLayoutManager.getItemCount()){
+                    mRecentPresenter.requestData();
+                }
+            }
+        }
+    };
 }

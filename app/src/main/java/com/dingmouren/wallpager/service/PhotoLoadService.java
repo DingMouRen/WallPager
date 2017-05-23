@@ -77,7 +77,6 @@ public class PhotoLoadService extends IntentService {
             connec.setConnectTimeout(20 * 1000);
             int code = connec.getResponseCode();
             if (code == 200){
-                Log.e(TAG,"图片开始下载");
                 InputStream is = connec.getInputStream();
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
                 int length = -1;
@@ -88,13 +87,9 @@ public class PhotoLoadService extends IntentService {
                     progress+= length;
                     mLoadPhotoEvent.setProgress(progress * 100 / contentLength);
                     EventBus.getDefault().postSticky(mLoadPhotoEvent);//发送事件,更新UI
-                    if (contentLength == 0){
-                    }else {
-                    }
                     bos.write(buffer,0,length);
-                    bos.flush();
                 }
-                Log.e(TAG,"图片下载完成");
+                bos.flush();
                 bos.close();
                 is.close();
                 savePhoto(photoId,bos);

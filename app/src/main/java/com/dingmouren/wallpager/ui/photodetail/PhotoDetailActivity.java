@@ -17,6 +17,7 @@ import com.dingmouren.wallpager.model.bean.UnsplashResult;
 
 public class PhotoDetailActivity extends BaseActivity {
     private static final String UNSPLASH_RESULT = "unsplash_result";
+    private PhotoDetailFragment mPhotoDetailFragment;
     public static void newInstance(Context context, UnsplashResult unsplashResult ){
         Intent intent = new Intent(context,PhotoDetailActivity.class);
         intent.putExtra(UNSPLASH_RESULT,unsplashResult);
@@ -34,12 +35,19 @@ public class PhotoDetailActivity extends BaseActivity {
         if (getIntent() == null){
             return;
         }
-        PhotoDetailFragment photoDetailFragment = PhotoDetailFragment.newInstance((UnsplashResult)getIntent().getSerializableExtra(UNSPLASH_RESULT) );
+        mPhotoDetailFragment = PhotoDetailFragment.newInstance((UnsplashResult)getIntent().getSerializableExtra(UNSPLASH_RESULT) );
         getSupportFragmentManager()
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .replace(R.id.container,photoDetailFragment)
+                .replace(R.id.container,mPhotoDetailFragment)
                 .commit();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        getSupportFragmentManager().beginTransaction()
+                .remove(mPhotoDetailFragment);
     }
 }
