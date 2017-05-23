@@ -1,13 +1,19 @@
 package com.dingmouren.wallpager.ui.photodetail;
 
+import android.app.WallpaperManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.base.BaseFragment;
 import com.dingmouren.wallpager.event.LoadPhotoEvent;
@@ -20,6 +26,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.IOException;
+
 import butterknife.BindView;
 
 /**
@@ -29,7 +37,6 @@ import butterknife.BindView;
 public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContract.View{
     private static final String TAG = PhotoDetailFragment.class.getName();
     private static final String UNSPLASH_RESULT = "unsplash_result";
-
     @BindView(R.id.img_photo) ImageView mPhoto;
     @BindView(R.id.img_arrow_back) ImageView mImgArrowBack;
     @BindView(R.id.img_author_header) ImageView mAuthorHeader;
@@ -48,6 +55,7 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
     private UnsplashResult mUnsplashResult;
     private GlideImageLoader mGlideImageLoader;
     private PhotoDetailPresenter mPhotoDetailPresenter;
+    private WallpaperManager mWallpaperManager;
     public static PhotoDetailFragment newInstance(UnsplashResult unsplashResult){
         PhotoDetailFragment fragment = new PhotoDetailFragment();
         Bundle bundle = new Bundle();
@@ -58,6 +66,7 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
 
     @Override
     public void init() {
+        mWallpaperManager = WallpaperManager.getInstance(getContext());
         mGlideImageLoader = new GlideImageLoader();
         if (getArguments() != null){
             mUnsplashResult = (UnsplashResult) getArguments().getSerializable(UNSPLASH_RESULT);
@@ -84,6 +93,9 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
         mImgArrowBack.setOnClickListener(v -> getActivity().onBackPressed());
         mTvLoadPhoto.setOnClickListener(v -> {
             getActivity().startService(PhotoLoadService.newIntent(getContext(),mUnsplashResult.getUrls().getRaw(),mUnsplashResult.getId()));
+        });
+        mTvSetPhotoPage.setOnClickListener(v -> {
+            setWallPager();
         });
     }
 
@@ -139,5 +151,27 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
             Snackbar.make(mAuthorHeader,"图片下载完成",Snackbar.LENGTH_SHORT).show();
         }
     }
+
+
+    private void setWallPager() {
+        Glide.with(this)
+                .load(mUnsplashResult.getUrls().getRaw())
+                .asBitmap()
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+
+                        if (resource != null){
+                            try {
+                                mWallpaperManager.setBitmap(resource);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }
+                });
+    }
+
 
 }

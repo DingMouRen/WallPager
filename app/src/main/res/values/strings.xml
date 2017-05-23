@@ -4,6 +4,7 @@
     <string name="home_title">壁纸</string>
     <string name="drawer_home">主页</string>
     <string name="drawer_favourite">收藏</string>
+    <string name="drawer_photos_loaded">图片已下载</string>
     <string name="drawer_settings">设置</string>
     <string name="drawer_sort">排序</string>
     <string name="drawer_open">打开</string>

@@ -7,18 +7,20 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.base.BaseActivity;
-import com.dingmouren.wallpager.ui.channelSort.ChannelManageFragment;
+import com.dingmouren.wallpager.ui.channelSort_unuse.ChannelManageFragment;
 import com.dingmouren.wallpager.ui.home.HomePageFragment;
+import com.dingmouren.wallpager.ui.photosloaded.PhotosLoadedActivity;
 import com.dingmouren.wallpager.ui.setting.SettingsActivity;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,DrawerLayout.DrawerListener {
     private static final String TAG = MainActivity.class.getName();
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
@@ -29,6 +31,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private HomePageFragment mHomePageFragment;
     private int mCurrentTabIndex;
     private int mIndex;
+    private int mDrawerSelectedItem = -1;//记录侧滑菜单选中条目，是重新开启新Activity
     private long mExitTime;
 
     @Override
@@ -41,6 +44,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void initView() {
         initFragments();//初始化fragment
         initNav();//初始化侧滑菜单
+    }
+
+    @Override
+    public void initListener() {
+        mDrawerLayout.setDrawerListener(this);
     }
 
     /**
@@ -71,20 +79,23 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        mDrawerLayout.closeDrawers();
         switch (item.getItemId()){
             case R.id.drawer_home:
                 changeFragmentIndex(item,0);
                 return true;
 //            case R.id.drawer_sort:
 //                changeFragmentIndex(item,1);
-//                return true;
+//                break;
             case R.id.drawer_favourite:
-                return true;
+                break;
+            case R.id.drawer_photos_loaded:
+                mDrawerSelectedItem = 101;
+                break;
             case R.id.drawer_settings:
-                startActivity(new Intent(MainActivity.this,SettingsActivity.class));
-                return true;
+                mDrawerSelectedItem = 110;
+                break;
         }
+        mDrawerLayout.closeDrawers();
         return false;
     }
 
@@ -121,5 +132,32 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }else {
             mDrawerLayout.openDrawer(GravityCompat.START);
         }
+    }
+
+    @Override
+    public void onDrawerSlide(View drawerView, float slideOffset) {
+
+    }
+
+    @Override
+    public void onDrawerOpened(View drawerView) {
+
+    }
+
+    @Override
+    public void onDrawerClosed(View drawerView) {
+        switch (mDrawerSelectedItem){
+            case 101://图片已下载
+                startActivity(new Intent(MainActivity.this,PhotosLoadedActivity.class));
+                break;
+            case 110://设置
+                startActivity(new Intent(MainActivity.this,SettingsActivity.class));
+                break;
+        }
+    }
+
+    @Override
+    public void onDrawerStateChanged(int newState) {
+
     }
 }

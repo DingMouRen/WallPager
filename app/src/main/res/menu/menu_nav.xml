@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_fav"
             android:title="@string/drawer_favourite"/>
         <item
+            android:id="@+id/drawer_photos_loaded"
+            android:icon="@drawable/ic_photos_loaded"
+            android:title="@string/drawer_photos_loaded"/>
+        <item
             android:id="@+id/drawer_settings"
             android:icon="@drawable/ic_settings"
             android:title="@string/drawer_settings"/>

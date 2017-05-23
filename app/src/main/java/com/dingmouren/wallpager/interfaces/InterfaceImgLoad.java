@@ -1,5 +1,6 @@
 package com.dingmouren.wallpager.interfaces;
 
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
@@ -10,5 +11,5 @@ import android.widget.ImageView;
 
 public interface InterfaceImgLoad {
     void loadImage(@NonNull String url,int holderImg, @NonNull ImageView imageView);
-    void loadAutoImage(@NonNull String url,int holderImg, @NonNull ImageView imageView);
+    void loadAutoImage(@NonNull String url, int holderImg, @NonNull ImageView imageView);
 }

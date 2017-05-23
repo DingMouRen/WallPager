@@ -131,7 +131,7 @@
                 android:drawablePadding="@dimen/activity_horizontal_margin"
                 android:drawableTop="@drawable/set_phone_page"
                 android:gravity="center"
-                android:text="设置壁纸"
+                android:text="设为壁纸"
                 app:layout_widthPercent="33%"
                 />
 
@@ -181,37 +181,31 @@
             <TextView
                 android:id="@+id/tv_attr_size"
                 style="@style/PhotoAttrTextViewStyle"
-                android:text="分辨率 500 x 500"
                 android:drawableLeft="@drawable/ic_size"
                 />
             <TextView
                 android:id="@+id/tv_attr_exposure"
                 style="@style/PhotoAttrTextViewStyle"
-                android:text="快门时间：1/4000"
                 android:drawableLeft="@drawable/ic_exposure"
                 />
             <TextView
                 android:id="@+id/tv_attr_aperture"
                 style="@style/PhotoAttrTextViewStyle"
-                android:text="光圈：2.8"
                 android:drawableLeft="@drawable/ic_aperture"
                 />
             <TextView
                 android:id="@+id/tv_attr_focal"
                 style="@style/PhotoAttrTextViewStyle"
-                android:text="焦距：24"
                 android:drawableLeft="@drawable/ic_focal"
                 />
             <TextView
                 android:id="@+id/tv_attr_model"
                 style="@style/PhotoAttrTextViewStyle"
-                android:text="器材：NIKON D610"
                 android:drawableLeft="@drawable/ic_model"
                 />
             <TextView
                 android:id="@+id/tv_attr_iso"
                 style="@style/PhotoAttrTextViewStyle"
-                android:text="曝光：1600"
                 android:drawableLeft="@drawable/ic_iso"
                 />
         </LinearLayout>

@@ -1,9 +1,8 @@
 package com.dingmouren.wallpager.ui.home.recent;
 
-import android.app.Activity;
-import android.graphics.Bitmap;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +10,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
-import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.dingmouren.wallpager.MyApplication;
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.model.GlideImageLoader;
@@ -32,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder> {
-
+    private static final String TAG = RecentAdapter.class.getName();
     private List<UnsplashResult> mList = new LinkedList<>();
     private GlideImageLoader mGlideImageLoader;
 
@@ -62,7 +58,7 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
         return mList == null ? 0 : mList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder  {
         CardView container;
         ImageView imgPager;
         RelativeLayout authotInfo;
@@ -76,6 +72,7 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
             authorHeader = (CircleImageView) itemView.findViewById(R.id.author_header);
             authorName = (TextView) itemView.findViewById(R.id.author_name);
             authorLocation = (TextView) itemView.findViewById(R.id.author_location);
+            Log.e(TAG,"下载图片的是否是单例："+mGlideImageLoader.hashCode());
         }
 
         private void bindData(UnsplashResult bean){
@@ -85,7 +82,7 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
                 authorName.setText(bean.getUser().getName());
                 authorLocation.setText(bean.getUser().getLocation());
             }
-            container.setOnClickListener(v -> PhotoDetailActivity.newInstance(container.getContext(),bean));
+            container.setOnClickListener(v -> PhotoDetailActivity.newInstance(container.getContext(),bean ));
         }
     }
 }

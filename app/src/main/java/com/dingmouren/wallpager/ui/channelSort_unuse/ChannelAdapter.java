@@ -1,25 +1,20 @@
-package com.dingmouren.wallpager.ui.channelSort;
+package com.dingmouren.wallpager.ui.channelSort_unuse;
 
 import android.graphics.Color;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.dingmouren.wallpager.MyApplication;
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.interfaces.ChannelAdapterDragListener;
 import com.dingmouren.wallpager.interfaces.ChannelItemSateListener;
 import com.dingmouren.wallpager.interfaces.ChannelTouchListener;
 import com.dingmouren.wallpager.model.dao.Channel;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 

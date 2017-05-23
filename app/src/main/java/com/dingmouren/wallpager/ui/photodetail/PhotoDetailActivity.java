@@ -3,6 +3,7 @@ package com.dingmouren.wallpager.ui.photodetail;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v4.app.FragmentTransaction;
 
 import com.dingmouren.wallpager.Constant;
@@ -16,7 +17,7 @@ import com.dingmouren.wallpager.model.bean.UnsplashResult;
 
 public class PhotoDetailActivity extends BaseActivity {
     private static final String UNSPLASH_RESULT = "unsplash_result";
-    public static void newInstance(Context context, UnsplashResult unsplashResult){
+    public static void newInstance(Context context, UnsplashResult unsplashResult ){
         Intent intent = new Intent(context,PhotoDetailActivity.class);
         intent.putExtra(UNSPLASH_RESULT,unsplashResult);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -33,7 +34,7 @@ public class PhotoDetailActivity extends BaseActivity {
         if (getIntent() == null){
             return;
         }
-        PhotoDetailFragment photoDetailFragment = PhotoDetailFragment.newInstance((UnsplashResult)getIntent().getSerializableExtra(UNSPLASH_RESULT));
+        PhotoDetailFragment photoDetailFragment = PhotoDetailFragment.newInstance((UnsplashResult)getIntent().getSerializableExtra(UNSPLASH_RESULT) );
         getSupportFragmentManager()
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)

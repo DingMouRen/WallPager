@@ -1,8 +1,7 @@
-package com.dingmouren.wallpager.ui.channelSort;
+package com.dingmouren.wallpager.ui.channelSort_unuse;
 
 import android.graphics.Canvas;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 

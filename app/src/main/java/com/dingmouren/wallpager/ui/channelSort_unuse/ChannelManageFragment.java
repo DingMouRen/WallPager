@@ -1,6 +1,5 @@
-package com.dingmouren.wallpager.ui.channelSort;
+package com.dingmouren.wallpager.ui.channelSort_unuse;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,13 +15,11 @@ import com.dingmouren.wallpager.model.dao.Channel;
 import com.dingmouren.wallpager.ui.MainActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import io.realm.Realm;
 import io.realm.RealmResults;
-import rx.internal.operators.SingleOnSubscribeUsing;
 
 /**
  * Created by dingmouren on 2017/5/16.
