@@ -41,6 +41,10 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
         mList.addAll(list);
     }
 
+    public int getListOldSize() {
+        return mList.size();
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(MyApplication.sContext).inflate(R.layout.item_home,parent,false);

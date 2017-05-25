@@ -17,4 +17,9 @@
         <item name="android:background">@drawable/ripple</item>
         <item name="android:textColor">@color/md_grey_600</item>
     </style>
+
+    <!--侧滑导航-->
+    <style name="DrawerItemStyle">
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>

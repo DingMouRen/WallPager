@@ -6,8 +6,15 @@ package com.dingmouren.wallpager.event;
 
 public class LoadPhotoEvent {
     private int progress;
+    private String photoId;
 
+    public String getPhotoId() {
+        return photoId;
+    }
 
+    public void setPhotoId(String photoId) {
+        this.photoId = photoId;
+    }
 
     public int getProgress() {
         return progress;

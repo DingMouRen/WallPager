@@ -69,6 +69,12 @@ public class PhotoLoadService extends IntentService {
            photoLoadUrl = intent.getStringExtra(PHOTO_LOAD_URL);
            photoId = intent.getStringExtra(PHOTO_ID);
        }
+        File file = new File(Environment.getExternalStorageDirectory()+"/WallPager/"+photoId+".jpg");
+        if (file.exists()){
+            mLoadPhotoEvent.setPhotoId("exist");
+            EventBus.getDefault().postSticky(mLoadPhotoEvent);//发送事件,图片文件已存在
+            return;
+        }
         HttpURLConnection connec = null;
         try{
             URL url = new URL(photoLoadUrl);
@@ -86,6 +92,7 @@ public class PhotoLoadService extends IntentService {
                 while((length = is.read(buffer))!= -1){
                     progress+= length;
                     mLoadPhotoEvent.setProgress(progress * 100 / contentLength);
+                    mLoadPhotoEvent.setPhotoId(photoId);
                     EventBus.getDefault().postSticky(mLoadPhotoEvent);//发送事件,更新UI
                     bos.write(buffer,0,length);
                 }

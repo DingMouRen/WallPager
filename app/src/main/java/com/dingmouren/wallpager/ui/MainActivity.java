@@ -1,6 +1,9 @@
 package com.dingmouren.wallpager.ui;
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -88,6 +91,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                break;
             case R.id.drawer_favourite:
                 break;
+            case R.id.drawer_invoke_system:
+                mDrawerSelectedItem = 102;
+                break;
             case R.id.drawer_photos_loaded:
                 mDrawerSelectedItem = 101;
                 break;
@@ -149,6 +155,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         switch (mDrawerSelectedItem){
             case 101://图片已下载
                 startActivity(new Intent(MainActivity.this,PhotosLoadedActivity.class));
+                mDrawerSelectedItem = -1;
+                break;
+            case 102:
+                Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
+                startActivity(Intent.createChooser(intent,"选择壁纸"));
                 mDrawerSelectedItem = -1;
                 break;
             case 110://设置

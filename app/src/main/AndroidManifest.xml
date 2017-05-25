@@ -2,10 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.dingmouren.wallpager">
 
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name = "android.permission.SET_WALLPAPER"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+
 
     <application
         android:name="com.dingmouren.wallpager.MyApplication"
@@ -30,7 +34,7 @@
         <activity android:name=".ui.photodetail.PhotoDetailActivity"/>
         <activity
             android:name=".ui.photosloaded.PhotosLoadedActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            />
 
         <service android:name=".service.PhotoLoadService">
             <intent-filter>

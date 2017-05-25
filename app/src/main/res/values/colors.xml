@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="layer_bg">#60000000</color>
+
     <!--Accent Color Collection-->
     <color name="accent_red">#f44336</color>
     <color name="accent_pink">#e91e63</color>

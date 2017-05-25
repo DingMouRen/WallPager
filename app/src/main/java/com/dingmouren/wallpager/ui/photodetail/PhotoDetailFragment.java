@@ -27,12 +27,14 @@ import com.dingmouren.wallpager.model.GlideImageLoader;
 import com.dingmouren.wallpager.model.bean.PhotoInfo;
 import com.dingmouren.wallpager.model.bean.UnsplashResult;
 import com.dingmouren.wallpager.service.PhotoLoadService;
+import com.dingmouren.wallpager.utils.DateUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
+import java.util.Date;
 
 import butterknife.BindView;
 
@@ -90,17 +92,22 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
         mGlideImageLoader.loadAutoImage(mUnsplashResult.getUrls().getRegular(),0,mPhoto);
         mGlideImageLoader.loadImage(mUnsplashResult.getUser().getProfile_image().getLarge(),0,mAuthorHeader);
         mAuthorName.setText(mUnsplashResult.getUser().getName());
-        mCreatedTime.setText("拍摄于 "+ mUnsplashResult.getCreated_at());
+        mCreatedTime.setText("拍摄于 "+ mUnsplashResult.getCreated_at().split("T")[0]);
     }
 
     @Override
     public void initListener() {
-        mImgArrowBack.setOnClickListener(v -> getActivity().onBackPressed());
+        mImgArrowBack.setOnClickListener(v -> onDestroy());
         mTvLoadPhoto.setOnClickListener(v -> {
+            Toast.makeText(MyApplication.sContext, "图片后台下载中...", Toast.LENGTH_SHORT).show();
             getActivity().startService(PhotoLoadService.newIntent(getContext(),mUnsplashResult.getUrls().getRaw(),mUnsplashResult.getId()));
         });
         mTvSetPhotoPage.setOnClickListener(v -> {//设置为壁纸
            mPhotoDetailPresenter.setWallPager();
+        });
+
+        mAuthorHeader.setOnClickListener(v -> {
+
         });
     }
 
@@ -160,20 +167,24 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
-    public void updateLoadProgress(LoadPhotoEvent event){
-        if (event == null) return;
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void updateLoadProgress(LoadPhotoEvent event) {
+        if (event != null && event.getPhotoId().equals("exist")){
+            Toast.makeText(MyApplication.sContext, "图片已下载", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (event == null || !event.getPhotoId().equals(mUnsplashResult.getId())) return;
         mProgressBar.animate()
                 .alpha(1)
                 .setDuration(300)
                 .start();
         mProgressBar.setProgress(event.getProgress());
-        if (event.getProgress() == 100){
+        if (event.getProgress() == 100) {
             mProgressBar.animate()
                     .alpha(0)
                     .setDuration(800)
                     .start();
-            Snackbar.make(mAuthorHeader,"图片下载完成",Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(MyApplication.sContext, event.getPhotoId() + ".jpg下载完成", Toast.LENGTH_SHORT).show();
         }
     }
 }

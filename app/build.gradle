@@ -76,4 +76,6 @@ dependencies {
     compile 'com.android.support:percent:25.3.1'
     /*eventbus*/
     compile 'org.greenrobot:eventbus:3.0.0'
+    /*对话框*/
+    compile 'com.afollestad.material-dialogs:core:0.9.4.5'
 }

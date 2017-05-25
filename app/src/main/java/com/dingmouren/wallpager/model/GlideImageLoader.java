@@ -11,6 +11,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.dingmouren.wallpager.MyApplication;
 import com.dingmouren.wallpager.interfaces.InterfaceImgLoad;
+import com.dingmouren.wallpager.utils.ScreenUtils;
 
 /**
  * Created by dingmouren on 2017/5/15.
@@ -65,13 +66,19 @@ public class GlideImageLoader implements InterfaceImgLoad {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                         if (resource != null){
-                            BitmapFactory.Options options = new BitmapFactory.Options();
-                            options.inJustDecodeBounds = true;
-                            imageView.setImageBitmap(resource);
+                            imageView.setImageBitmap(zipBitmap(resource));
                         }
                     }
                 });
 
+    }
+
+    private Bitmap zipBitmap(Bitmap bitmap){
+        int reqWid = ScreenUtils.getScreenWidth(MyApplication.sContext);
+        int rawWid = bitmap.getWidth();
+        int scale = reqWid / rawWid;
+        int reqHeight = bitmap.getHeight() * scale;
+        return Bitmap.createScaledBitmap(bitmap,reqWid,reqHeight,true);
     }
 
 }

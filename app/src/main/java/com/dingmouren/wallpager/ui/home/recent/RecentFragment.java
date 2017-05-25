@@ -2,10 +2,13 @@ package com.dingmouren.wallpager.ui.home.recent;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.dingmouren.wallpager.MyApplication;
 import com.dingmouren.wallpager.R;
@@ -13,6 +16,7 @@ import com.dingmouren.wallpager.base.BaseFragment;
 import com.dingmouren.wallpager.model.bean.UnsplashResult;
 import com.dingmouren.wallpager.ui.dagger.DaggerMainActivityComponent;
 import com.dingmouren.wallpager.ui.dagger.MainActivityModule;
+import com.dingmouren.wallpager.utils.NetUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -32,7 +36,7 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
     @BindView(R.id.recycler) RecyclerView mRecyclerView;
     @BindView(R.id.swipe_refresh)SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.fab) FloatingActionButton mFab;
-
+    @BindView(R.id.layout_no_net) RelativeLayout mLayoutNoWifi;
     private Handler mHandler;
     private DelayRunnable mDelayRunnable;
     @Inject
@@ -84,15 +88,37 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
     public void initListener() {
         mRecyclerView.addOnScrollListener(mOnScrollListener);
         mFab.setOnClickListener(v -> mRecyclerView.smoothScrollToPosition(0));
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                setRefresh(false);
+            }
+        });
+        mLayoutNoWifi.setOnClickListener(v -> initData());
     }
 
     @Override
     public void initData() {
         setRefresh(true);
-        mRecentPresenter.setCategory(mCategotyId);
-        mRecentPresenter.requestData();
+        if (NetUtils.isNetworkAvailable(MyApplication.sContext) && NetUtils.isWiFi(MyApplication.sContext)) {
+            mRecentPresenter.setCategory(mCategotyId);
+            mRecentPresenter.requestData();
+            mLayoutNoWifi.setVisibility(View.INVISIBLE);
+            mSwipeRefreshLayout.setVisibility(View.VISIBLE);
+            mFab.setVisibility(View.VISIBLE);
+        }else {
+            mLayoutNoWifi.setVisibility(View.VISIBLE);
+            mSwipeRefreshLayout.setVisibility(View.INVISIBLE);
+            mFab.setVisibility(View.INVISIBLE);
+        }
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mRecyclerView != null) mRecyclerView.removeAllViews();
+
+    }
 
     @Override
     public void setRefresh(boolean refresh) {
@@ -105,8 +131,9 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
 
     @Override
     public void setData(List<UnsplashResult> data) {
+        int insertStartPosition = mHomeAdapter.getListOldSize() -1;
         mHomeAdapter.setList(data);
-        mHomeAdapter.notifyDataSetChanged();
+        mHomeAdapter.notifyItemRangeInserted(insertStartPosition,data.size());
         setRefresh(false);
     }
 

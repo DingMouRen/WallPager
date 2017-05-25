@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/container"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
@@ -21,11 +22,16 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         app:fabSize="mini"
         android:src="@drawable/ic_arrow_upward_black_24dp"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="@dimen/activity_horizontal_margin"
         app:layout_behavior="com.dingmouren.wallpager.utils.MyFABBehavior"
         />
-</android.support.design.widget.CoordinatorLayout>
+    <include layout="@layout/layout_no_net"
+             android:id="@+id/layout_no_net"
+        android:visibility="invisible"
+        />
+</RelativeLayout>
