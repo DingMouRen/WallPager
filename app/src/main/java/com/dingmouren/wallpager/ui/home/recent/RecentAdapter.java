@@ -1,5 +1,6 @@
 package com.dingmouren.wallpager.ui.home.recent;
 
+import android.app.Activity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +15,7 @@ import com.dingmouren.wallpager.MyApplication;
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.model.GlideImageLoader;
 import com.dingmouren.wallpager.model.bean.UnsplashResult;
+import com.dingmouren.wallpager.ui.MainActivity;
 import com.dingmouren.wallpager.ui.photodetail.PhotoDetailActivity;
 
 import java.util.LinkedList;
@@ -30,11 +32,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder> {
     private static final String TAG = RecentAdapter.class.getName();
     private List<UnsplashResult> mList = new LinkedList<>();
-    private GlideImageLoader mGlideImageLoader;
+    private Activity mActivity;
 
-    @Inject
-    public RecentAdapter(GlideImageLoader glideImageLoader) {
-        this.mGlideImageLoader = glideImageLoader;
+    public RecentAdapter(Activity activity) {
+        this.mActivity = activity;
     }
 
     public void setList(List<UnsplashResult> list){
@@ -80,12 +81,12 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
 
         private void bindData(UnsplashResult bean){
             if (bean != null){
-                mGlideImageLoader.loadImage(bean.getUser().getProfile_image().getMedium(),R.drawable.user_icon,authorHeader);
-                mGlideImageLoader.loadAutoImage(bean.getUrls().getRegular(),0,imgPager);
+                GlideImageLoader.loadImage(bean.getUser().getProfile_image().getMedium(),R.drawable.user_icon,authorHeader);
+                GlideImageLoader.loadAutoImage(bean.getUrls().getRegular(),0,imgPager);
                 authorName.setText(bean.getUser().getName());
                 authorLocation.setText(bean.getUser().getLocation());
             }
-            container.setOnClickListener(v -> PhotoDetailActivity.newInstance(container.getContext(),bean ));
+            container.setOnClickListener(v -> PhotoDetailActivity.newInstance(mActivity,bean,v ));
         }
     }
 }

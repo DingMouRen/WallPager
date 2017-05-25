@@ -1,7 +1,6 @@
 package com.dingmouren.wallpager.model;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
@@ -10,26 +9,23 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.dingmouren.wallpager.MyApplication;
-import com.dingmouren.wallpager.interfaces.InterfaceImgLoad;
 import com.dingmouren.wallpager.utils.ScreenUtils;
 
 /**
  * Created by dingmouren on 2017/5/15.
  */
 
-public class GlideImageLoader implements InterfaceImgLoad {
+public class GlideImageLoader  {
 
 
-    @Override
-    public void loadImage(@NonNull String url,int holderImg, @NonNull ImageView imageView) {
+    public static void loadImage(@NonNull String url,int holderImg, @NonNull ImageView imageView) {
         Glide.with(MyApplication.sContext).load(url)
                 .crossFade(500)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(imageView);
     }
 
-    @Override
-    public void loadAutoImage(@NonNull String url, int holderImg, @NonNull ImageView imageView) {
+    public static void loadAutoImage(@NonNull String url, int holderImg, @NonNull ImageView imageView) {
 //        Glide.with(MyApplication.sContext)
 //                .load(url)
 //                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -73,7 +69,7 @@ public class GlideImageLoader implements InterfaceImgLoad {
 
     }
 
-    private Bitmap zipBitmap(Bitmap bitmap){
+    private static Bitmap zipBitmap(Bitmap bitmap){
         int reqWid = ScreenUtils.getScreenWidth(MyApplication.sContext);
         int rawWid = bitmap.getWidth();
         int scale = reqWid / rawWid;

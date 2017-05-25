@@ -1,10 +1,18 @@
 package com.dingmouren.wallpager.ui.photodetail;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Slide;
+import android.view.Gravity;
+import android.view.View;
 
 import com.dingmouren.wallpager.Constant;
 import com.dingmouren.wallpager.R;
@@ -18,11 +26,15 @@ import com.dingmouren.wallpager.model.bean.UnsplashResult;
 public class PhotoDetailActivity extends BaseActivity {
     private static final String UNSPLASH_RESULT = "unsplash_result";
     private PhotoDetailFragment mPhotoDetailFragment;
-    public static void newInstance(Context context, UnsplashResult unsplashResult ){
-        Intent intent = new Intent(context,PhotoDetailActivity.class);
+    public static void newInstance(Activity activity, UnsplashResult unsplashResult, View view){
+        Intent intent = new Intent(activity,PhotoDetailActivity.class);
         intent.putExtra(UNSPLASH_RESULT,unsplashResult);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
+        if (Build.VERSION.SDK_INT >= 21) {
+            activity.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity, view, activity.getResources().getString(R.string.share_photo)).toBundle());
+        }else {
+            activity.startActivity(intent);
+        }
     }
 
     @Override

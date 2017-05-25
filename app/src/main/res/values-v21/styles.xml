@@ -3,5 +3,11 @@
 <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <item name="android:windowTranslucentStatus">true</item>
     <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:windowContentTransitions">true</item>
 </style>
+
+    <style name="PhotoDetailTheme" parent="AppTheme">
+        <item name="android:windowEnterTransition">@transition/enter_photo_detail</item>
+        <item name="android:windowExitTransition">@transition/enter_photo_detail</item>
+    </style>
 </resources>

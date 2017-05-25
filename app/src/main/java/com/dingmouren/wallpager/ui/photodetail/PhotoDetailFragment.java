@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -62,8 +63,8 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
     @BindView(R.id.tv_attr_iso) TextView mTvPhotoIso;//曝光
     @BindView(R.id.progressbar)  ProgressBar mProgressBar;
     private UnsplashResult mUnsplashResult;
-    private GlideImageLoader mGlideImageLoader;
     private PhotoDetailPresenter mPhotoDetailPresenter;
+    private MaterialDialog mMaterialDialog;
     public static PhotoDetailFragment newInstance(UnsplashResult unsplashResult){
         PhotoDetailFragment fragment = new PhotoDetailFragment();
         Bundle bundle = new Bundle();
@@ -74,7 +75,9 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
 
     @Override
     public void init() {
-        mGlideImageLoader = new GlideImageLoader();
+        mMaterialDialog = new MaterialDialog.Builder(getActivity()).build();
+        mMaterialDialog.setCancelable(true);
+        mMaterialDialog.setContent("正在为您的手机设置壁纸\n客官请骚等...");
         if (getArguments() != null){
             mUnsplashResult = (UnsplashResult) getArguments().getSerializable(UNSPLASH_RESULT);
         }
@@ -89,15 +92,15 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
 
     @Override
     public void initView() {
-        mGlideImageLoader.loadAutoImage(mUnsplashResult.getUrls().getRegular(),0,mPhoto);
-        mGlideImageLoader.loadImage(mUnsplashResult.getUser().getProfile_image().getLarge(),0,mAuthorHeader);
+        GlideImageLoader.loadAutoImage(mUnsplashResult.getUrls().getRegular(),0,mPhoto);
+        GlideImageLoader.loadImage(mUnsplashResult.getUser().getProfile_image().getLarge(),0,mAuthorHeader);
         mAuthorName.setText(mUnsplashResult.getUser().getName());
         mCreatedTime.setText("拍摄于 "+ mUnsplashResult.getCreated_at().split("T")[0]);
     }
 
     @Override
     public void initListener() {
-        mImgArrowBack.setOnClickListener(v -> onDestroy());
+        mImgArrowBack.setOnClickListener(v -> getActivity().onBackPressed());
         mTvLoadPhoto.setOnClickListener(v -> {
             Toast.makeText(MyApplication.sContext, "图片后台下载中...", Toast.LENGTH_SHORT).show();
             getActivity().startService(PhotoLoadService.newIntent(getContext(),mUnsplashResult.getUrls().getRaw(),mUnsplashResult.getId()));
@@ -117,9 +120,10 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
         mPhotoDetailPresenter.requestData();
     }
 
+
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDestroy() {
+        super.onDestroy();
         EventBus.getDefault().unregister(this);
         if (mContanier != null){
             mContanier.removeAllViews();
@@ -132,10 +136,6 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
        showPhotoAttr(photoInfo);
     }
 
-    @Override
-    public void setWappPagerStart() {
-        Toast.makeText(MyApplication.sContext,"设置手机壁纸中...",Toast.LENGTH_SHORT).show();
-    }
 
 
     @Override
@@ -146,6 +146,16 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
     @Override
     public void setWallPagerFail() {
         Toast.makeText(MyApplication.sContext,"手机壁纸设置失败",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showDialog() {
+        mMaterialDialog.show();
+    }
+
+    @Override
+    public void dismissDialog() {
+        mMaterialDialog.dismiss();
     }
 
     /**
@@ -167,6 +177,7 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
 
     }
 
+
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void updateLoadProgress(LoadPhotoEvent event) {
         if (event != null && event.getPhotoId().equals("exist")){
@@ -184,7 +195,7 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
                     .alpha(0)
                     .setDuration(800)
                     .start();
-            Toast.makeText(MyApplication.sContext, event.getPhotoId() + ".jpg下载完成", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MyApplication.sContext, event.getPhotoId() + ".jpg下载到你的相册里咯", Toast.LENGTH_SHORT).show();
         }
     }
 }

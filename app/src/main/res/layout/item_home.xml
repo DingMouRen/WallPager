@@ -18,6 +18,7 @@
             android:id="@+id/img_pager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:transitionName="@string/share_photo"
             />
         <!--作者信息-->
         <RelativeLayout

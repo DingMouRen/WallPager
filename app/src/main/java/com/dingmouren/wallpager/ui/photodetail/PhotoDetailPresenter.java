@@ -60,6 +60,7 @@ public class PhotoDetailPresenter implements PhotoInfoContract.Presenter {
 
     @Override
     public void setWallPager() {
+
         new SetWallPagerTask().execute(mPhotoUrl);
     }
 
@@ -68,7 +69,7 @@ public class PhotoDetailPresenter implements PhotoInfoContract.Presenter {
 
         @Override
         protected void onPreExecute() {
-            mView.setWappPagerStart();
+            mView.showDialog();
         }
 
         @Override
@@ -123,9 +124,11 @@ public class PhotoDetailPresenter implements PhotoInfoContract.Presenter {
         protected void onPostExecute(Integer integer) {
            switch (integer.intValue()){
                case 200:
+                   mView.dismissDialog();
                    mView.setWallPagerSuccess();
                    break;
                case 400:
+                   mView.dismissDialog();
                    mView.setWallPagerFail();
                    break;
            }

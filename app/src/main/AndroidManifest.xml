@@ -31,10 +31,13 @@
             android:name="com.dingmouren.wallpager.ui.setting.SettingsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
-        <activity android:name=".ui.photodetail.PhotoDetailActivity"/>
+        <activity android:name=".ui.photodetail.PhotoDetailActivity"
+                        android:theme="@style/PhotoDetailTheme"
+        />
         <activity
             android:name=".ui.photosloaded.PhotosLoadedActivity"
             />
+        <activity android:name=".ui.about.AboutActivity"/>
 
         <service android:name=".service.PhotoLoadService">
             <intent-filter>

@@ -3,6 +3,7 @@ package com.dingmouren.wallpager.ui;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -10,16 +11,20 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.transition.ChangeImageTransform;
+import android.transition.Explode;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.base.BaseActivity;
+import com.dingmouren.wallpager.ui.about.AboutActivity;
 import com.dingmouren.wallpager.ui.channelSort_unuse.ChannelManageFragment;
 import com.dingmouren.wallpager.ui.home.HomePageFragment;
 import com.dingmouren.wallpager.ui.photosloaded.PhotosLoadedActivity;
 import com.dingmouren.wallpager.ui.setting.SettingsActivity;
+import com.jiongbull.jlog.BuildConfig;
 
 import butterknife.BindView;
 
@@ -47,6 +52,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void initView() {
         initFragments();//初始化fragment
         initNav();//初始化侧滑菜单
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setSharedElementExitTransition(new ChangeImageTransform());
+            getWindow().setSharedElementReenterTransition(new ChangeImageTransform());
+        }
     }
 
     @Override
@@ -89,8 +98,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //            case R.id.drawer_sort:
 //                changeFragmentIndex(item,1);
 //                break;
-            case R.id.drawer_favourite:
-                break;
             case R.id.drawer_invoke_system:
                 mDrawerSelectedItem = 102;
                 break;
@@ -99,6 +106,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
             case R.id.drawer_settings:
                 mDrawerSelectedItem = 110;
+                break;
+            case R.id.drawer_about:
+                mDrawerSelectedItem = 103;
                 break;
         }
         mDrawerLayout.closeDrawers();
@@ -160,6 +170,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case 102:
                 Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
                 startActivity(Intent.createChooser(intent,"选择壁纸"));
+                mDrawerSelectedItem = -1;
+                break;
+            case 103:
+                startActivity(new Intent(MainActivity.this,AboutActivity.class));
                 mDrawerSelectedItem = -1;
                 break;
             case 110://设置

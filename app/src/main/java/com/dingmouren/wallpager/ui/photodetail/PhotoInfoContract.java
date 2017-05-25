@@ -15,9 +15,10 @@ public interface PhotoInfoContract {
 
     interface View extends BaseView{
         void setData(PhotoInfo photoInfo);
-        void setWappPagerStart();
         void setWallPagerSuccess();
         void setWallPagerFail();
+        void showDialog();
+        void dismissDialog();
     }
 
     interface Presenter extends BasePresenter{

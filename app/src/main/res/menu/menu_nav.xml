@@ -8,10 +8,6 @@
       <!--  <item android:id="@+id/drawer_sort"
               android:icon="@drawable/ic_sort"
               android:title="@string/drawer_sort"/>-->
-        <item
-            android:id="@+id/drawer_favourite"
-            android:icon="@drawable/ic_fav"
-            android:title="@string/drawer_favourite"/>
         <item android:id="@+id/drawer_invoke_system"
             android:icon="@drawable/ic_invoke_system_pager"
               android:title="@string/drawer_invoke_system_page"
@@ -24,5 +20,10 @@
             android:id="@+id/drawer_settings"
             android:icon="@drawable/ic_settings"
             android:title="@string/drawer_settings"/>
+        <item
+            android:id="@+id/drawer_about"
+            android:icon="@drawable/ic_about"
+            android:title="@string/drawer_about"
+            />
     </group>
 </menu>

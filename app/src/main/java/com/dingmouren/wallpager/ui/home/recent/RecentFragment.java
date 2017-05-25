@@ -39,7 +39,6 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
     @BindView(R.id.layout_no_net) RelativeLayout mLayoutNoWifi;
     private Handler mHandler;
     private DelayRunnable mDelayRunnable;
-    @Inject
     RecentAdapter mHomeAdapter;
     @Inject
     RecentPresenter mRecentPresenter;
@@ -70,6 +69,7 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
 
     @Override
     public void initView() {
+        mHomeAdapter = new RecentAdapter(getActivity());
         mLinearLayoutManager = new LinearLayoutManager(MyApplication.sContext);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
