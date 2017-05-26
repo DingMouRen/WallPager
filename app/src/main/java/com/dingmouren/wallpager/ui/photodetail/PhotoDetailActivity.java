@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.transition.ChangeImageTransform;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
@@ -35,6 +36,14 @@ public class PhotoDetailActivity extends BaseActivity {
             activity.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity, view, activity.getResources().getString(R.string.share_photo)).toBundle());
         }else {
             activity.startActivity(intent);
+        }
+    }
+
+    @Override
+    public void init() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setSharedElementExitTransition(new ChangeImageTransform());
+            getWindow().setSharedElementReenterTransition(new ChangeImageTransform());
         }
     }
 

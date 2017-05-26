@@ -102,7 +102,7 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
 
     @Override
     public void initListener() {
-        mImgArrowBack.setOnClickListener(v -> getActivity().onBackPressed());
+        mImgArrowBack.setOnClickListener(v -> getActivity().finish());
         mTvLoadPhoto.setOnClickListener(v -> {
             Toast.makeText(MyApplication.sContext, "图片后台下载中...", Toast.LENGTH_SHORT).show();
             getActivity().startService(PhotoLoadService.newIntent(getContext(),mUnsplashResult.getUrls().getRaw(),mUnsplashResult.getId()));

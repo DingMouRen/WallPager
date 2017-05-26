@@ -10,12 +10,15 @@ import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.transition.Fade;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.dingmouren.wallpager.ApplicationComponent;
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.base.BaseActivity;
@@ -28,17 +31,21 @@ import butterknife.BindView;
  */
 
 public class SplashActivity extends BaseActivity {
-    @BindView(R.id.desc)   TextView mDesc;
-    @BindView(R.id.appname)   TextView mAppName;
-    @BindView(R.id.logo) ImageView mImageView;
+    @BindView(R.id.desc)
+    TextView mDesc;
+    @BindView(R.id.appname)
+    TextView mAppName;
+    @BindView(R.id.logo)
+    ImageView mImageView;
+
     @Override
     public void init() {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Fade fade = new Fade();
-                fade.setDuration(800);
-                getWindow().setExitTransition(fade);
-                getWindow().setEnterTransition(fade);
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Fade fade = new Fade();
+            fade.setDuration(800);
+            getWindow().setExitTransition(fade);
+            getWindow().setEnterTransition(fade);
+        }
     }
 
     @Override
@@ -52,21 +59,36 @@ public class SplashActivity extends BaseActivity {
         AssetManager assetManager = getAssets();
         Typeface typeface = Typeface.createFromAsset(assetManager, "fonts/font_style1.ttf");
         mDesc.setTypeface(typeface);
-        new Handler().postDelayed(() -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class),     ActivityOptions.makeSceneTransitionAnimation(SplashActivity.this).toBundle());
-                delayFinish();
-            }else {
-                startActivity(new Intent(SplashActivity.this,MainActivity.class));
-                delayFinish();
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        if (Build.VERSION.SDK_INT < 21) {
+            MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            finish();
+                        }
+                    });
+            MaterialDialog dialog = builder.build();
+            dialog.setContent("您的安卓手机版本小于5.0，不能使用本软件的正常服务。");
+            dialog.setActionButton(DialogAction.POSITIVE, "确定");
+            dialog.show();
 
-            }
-        }, 1000);
+        } else {
+            new Handler().postDelayed(() -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class), ActivityOptions.makeSceneTransitionAnimation(SplashActivity.this).toBundle());
+                    delayFinish();
+                } else {
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    delayFinish();
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+                }
+            }, 1000);
+        }
     }
 
-    private void delayFinish(){
-        new Handler().postDelayed(()->finish(),1000);
+    private void delayFinish() {
+        new Handler().postDelayed(() -> finish(), 1000);
     }
 
 }

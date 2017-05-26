@@ -72,8 +72,8 @@ public class GlideImageLoader  {
     private static Bitmap zipBitmap(Bitmap bitmap){
         int reqWid = ScreenUtils.getScreenWidth(MyApplication.sContext);
         int rawWid = bitmap.getWidth();
-        int scale = reqWid / rawWid;
-        int reqHeight = bitmap.getHeight() * scale;
+        float scale = (float)reqWid / (float) rawWid;
+        int reqHeight = (int)( bitmap.getHeight() * scale);
         return Bitmap.createScaledBitmap(bitmap,reqWid,reqHeight,true);
     }
 
