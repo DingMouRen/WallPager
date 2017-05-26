@@ -50,10 +50,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void init() {
         if (Build.VERSION.SDK_INT >= 21){
-            Slide slide = new Slide();
-            slide.setSlideEdge(Gravity.BOTTOM);
-            slide.setDuration(800);
-            getWindow().setEnterTransition(slide);
+            getWindow().setEnterTransition(new Fade());
         }
     }
 

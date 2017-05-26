@@ -168,6 +168,7 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
             if (newState == RecyclerView.SCROLL_STATE_IDLE && mLinearLayoutManager.getItemCount() > 1){
                 int lastIndex = mLinearLayoutManager.findLastVisibleItemPosition();
                 if (lastIndex + 1 == mLinearLayoutManager.getItemCount()){
+                    setRefresh(true);
                     mRecentPresenter.requestData();
                 }
             }

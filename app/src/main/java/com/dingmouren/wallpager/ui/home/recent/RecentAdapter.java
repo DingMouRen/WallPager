@@ -70,7 +70,6 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
         RelativeLayout authotInfo;
         CircleImageView authorHeader;
         TextView authorName,authorLocation;
-        RelativeLayout rela_author_info;
         public ViewHolder(View itemView) {
             super(itemView);
             container = (CardView) itemView.findViewById(R.id.container);
@@ -79,29 +78,33 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
             authorHeader = (CircleImageView) itemView.findViewById(R.id.author_header);
             authorName = (TextView) itemView.findViewById(R.id.author_name);
             authorLocation = (TextView) itemView.findViewById(R.id.author_location);
-            rela_author_info = (RelativeLayout) itemView.findViewById(R.id.rela_author_info);
-            initView();
             initListener();
         }
 
-        private void initView() {
-            rela_author_info.setVisibility(View.INVISIBLE);
-        }
 
         private void initListener() {
             ViewTreeObserver viewTreeObserver = container.getViewTreeObserver();
             viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
-                    if (imgPager.getMeasuredHeight() > 0){
-                        rela_author_info.setVisibility(View.VISIBLE);
+                    if (imgPager.getMeasuredHeight() > 300){
+                        authotInfo.setVisibility(View.VISIBLE);
                     }
                 }
             });
         }
 
         private void bindData(UnsplashResult bean){
-            imgPager.refreshDrawableState();//清空之前的图片缓存
+            if (imgPager.getMeasuredHeight() <300){
+                authotInfo.setVisibility(View.INVISIBLE);
+            }else {
+                authotInfo.setVisibility(View.VISIBLE);
+            }
+            if (imgPager.getDrawable() != null){
+                imgPager.setImageBitmap(null);
+                imgPager.refreshDrawableState();
+            }
+
             if (bean != null){
                 GlideImageLoader.loadImage(bean.getUser().getProfile_image().getMedium(),R.drawable.user_icon,authorHeader);
                 GlideImageLoader.loadAutoImage(bean.getUrls().getRegular(),0,imgPager);

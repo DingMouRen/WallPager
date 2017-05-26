@@ -15,6 +15,7 @@ import android.transition.Fade;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -37,12 +38,14 @@ public class SplashActivity extends BaseActivity {
     TextView mAppName;
     @BindView(R.id.logo)
     ImageView mImageView;
+    @BindView(R.id.container)
+    RelativeLayout mContainer;
 
     @Override
     public void init() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Fade fade = new Fade();
-            fade.setDuration(800);
+            fade.setDuration(500);
             getWindow().setExitTransition(fade);
             getWindow().setEnterTransition(fade);
         }
@@ -53,6 +56,14 @@ public class SplashActivity extends BaseActivity {
         return R.layout.activity_splash;
     }
 
+    @Override
+    public void onEnterAnimationComplete() {
+        super.onEnterAnimationComplete();
+        mContainer.animate()
+                .alpha(1)
+                .setDuration(500)
+                .start();
+    }
 
     @Override
     public void initView() {
@@ -80,7 +91,7 @@ public class SplashActivity extends BaseActivity {
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
                 }
-            }, 1000);
+            }, 1500);
         }
     }
 
