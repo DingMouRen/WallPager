@@ -78,6 +78,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mDrawerLayout.setDrawerListener(this);
     }
 
+
     /**
      * 初始化fragment
      */

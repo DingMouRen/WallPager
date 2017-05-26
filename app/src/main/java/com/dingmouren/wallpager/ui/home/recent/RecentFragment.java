@@ -100,6 +100,7 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
     @Override
     public void initData() {
         setRefresh(true);
+        mRecyclerView.setVisibility(View.INVISIBLE);
         if (NetUtils.isNetworkAvailable(MyApplication.sContext) && NetUtils.isWiFi(MyApplication.sContext)) {
             mRecentPresenter.setCategory(mCategotyId);
             mRecentPresenter.requestData();
@@ -135,6 +136,7 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
         mHomeAdapter.setList(data);
         mHomeAdapter.notifyItemRangeInserted(insertStartPosition,data.size());
         setRefresh(false);
+        mRecyclerView.setVisibility(View.VISIBLE);
     }
 
     @Override

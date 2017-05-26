@@ -34,6 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/appname"
             android:text="@string/splash_desc"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:textStyle="bold"
             android:textSize="20sp"
             android:layout_centerHorizontal="true"
             />

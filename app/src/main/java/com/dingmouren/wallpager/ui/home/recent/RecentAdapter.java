@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -63,12 +64,13 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
         return mList == null ? 0 : mList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder  {
+    public class ViewHolder extends RecyclerView.ViewHolder   {
         CardView container;
         ImageView imgPager;
         RelativeLayout authotInfo;
         CircleImageView authorHeader;
         TextView authorName,authorLocation;
+        RelativeLayout rela_author_info;
         public ViewHolder(View itemView) {
             super(itemView);
             container = (CardView) itemView.findViewById(R.id.container);
@@ -77,6 +79,25 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
             authorHeader = (CircleImageView) itemView.findViewById(R.id.author_header);
             authorName = (TextView) itemView.findViewById(R.id.author_name);
             authorLocation = (TextView) itemView.findViewById(R.id.author_location);
+            rela_author_info = (RelativeLayout) itemView.findViewById(R.id.rela_author_info);
+            initView();
+            initListener();
+        }
+
+        private void initView() {
+            rela_author_info.setVisibility(View.INVISIBLE);
+        }
+
+        private void initListener() {
+            ViewTreeObserver viewTreeObserver = container.getViewTreeObserver();
+            viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if (imgPager.getMeasuredHeight() > 0){
+                        rela_author_info.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
         }
 
         private void bindData(UnsplashResult bean){
@@ -89,5 +110,6 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
             }
             container.setOnClickListener(v -> PhotoDetailActivity.newInstance(mActivity,bean,v ));
         }
+
     }
 }

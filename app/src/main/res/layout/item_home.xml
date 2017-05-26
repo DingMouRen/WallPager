@@ -37,6 +37,7 @@
                 />
 
             <RelativeLayout
+                android:id="@+id/rela_author_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

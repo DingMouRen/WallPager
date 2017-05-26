@@ -56,9 +56,6 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        AssetManager assetManager = getAssets();
-        Typeface typeface = Typeface.createFromAsset(assetManager, "fonts/font_style1.ttf");
-        mDesc.setTypeface(typeface);
         if (Build.VERSION.SDK_INT < 21) {
             MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
                     .onPositive(new MaterialDialog.SingleButtonCallback() {
