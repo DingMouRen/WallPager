@@ -131,7 +131,7 @@ public class RecentFragment extends BaseFragment implements RecentContract.View{
 
     @Override
     public void setData(List<UnsplashResult> data) {
-        int insertStartPosition = mHomeAdapter.getListOldSize() -1;
+        int insertStartPosition = mHomeAdapter.getListOldSize() ;
         mHomeAdapter.setList(data);
         mHomeAdapter.notifyItemRangeInserted(insertStartPosition,data.size());
         setRefresh(false);

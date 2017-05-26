@@ -13,6 +13,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.transition.ChangeImageTransform;
 import android.transition.Explode;
+import android.transition.Fade;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private int mIndex;
     private int mDrawerSelectedItem = -1;//记录侧滑菜单选中条目，是重新开启新Activity
     private long mExitTime;
+
+    @Override
+    public void init() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Fade fade = new Fade();
+            fade.setDuration(800);
+            getWindow().setEnterTransition(fade);
+        }
+    }
 
     @Override
     public int requestLayout() {

@@ -60,7 +60,7 @@ public class HomePageFragment extends BaseFragment {
 
 
     private void initToolbar() {
-        mToolbar.setTitle(R.string.home_title);
+        mToolbar.setTitle(R.string.app_name);
         mToolbar.setTitleTextColor(Color.WHITE);
         ((MainActivity)getActivity()).setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.drawable.img_slide_menu);

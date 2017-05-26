@@ -6,9 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name = "android.permission.SET_WALLPAPER"/>
+    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
 
 
     <application
@@ -18,8 +17,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name="com.dingmouren.wallpager.ui.MainActivity"
+        <activity android:name=".ui.splash.SplashActivity"
+            android:theme="@style/SplashTheme"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -28,12 +27,17 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.dingmouren.wallpager.ui.MainActivity"
+            >
+        </activity>
+        <activity
             android:name="com.dingmouren.wallpager.ui.setting.SettingsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
-        <activity android:name=".ui.photodetail.PhotoDetailActivity"
-                        android:theme="@style/PhotoDetailTheme"
-        />
+        <activity
+            android:name=".ui.photodetail.PhotoDetailActivity"
+            android:theme="@style/PhotoDetailTheme"
+            />
         <activity
             android:name=".ui.photosloaded.PhotosLoadedActivity"
             />

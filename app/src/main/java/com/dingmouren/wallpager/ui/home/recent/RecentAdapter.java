@@ -80,6 +80,7 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
         }
 
         private void bindData(UnsplashResult bean){
+            imgPager.refreshDrawableState();//清空之前的图片缓存
             if (bean != null){
                 GlideImageLoader.loadImage(bean.getUser().getProfile_image().getMedium(),R.drawable.user_icon,authorHeader);
                 GlideImageLoader.loadAutoImage(bean.getUrls().getRegular(),0,imgPager);
