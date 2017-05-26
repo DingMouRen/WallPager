@@ -23,7 +23,7 @@
         android:layout_alignParentRight="true"
         android:visibility="invisible"
         android:checked="true"
-        app:buttonTint="@android:color/holo_red_light"
+        android:buttonTint="@android:color/holo_red_light"
         android:layout_alignParentTop="true"
         />
 </RelativeLayout>

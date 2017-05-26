@@ -8,6 +8,7 @@ import com.dingmouren.wallpager.model.dao.Channel;
 import com.dingmouren.wallpager.utils.MyFABBehavior;
 import com.dingmouren.wallpager.utils.SPUtil;
 import com.jiongbull.jlog.JLog;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ public class MyApplication extends Application {
         mApplicationComponent.inject(this);
         JLog.init(this);
         initPrimaryColor();
+        CrashReport.initCrashReport(getApplicationContext());
     }
 
     private void initPrimaryColor() {

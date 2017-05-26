@@ -32,6 +32,5 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_alignParentRight="true"
         android:textColor="@color/md_teal_A700"
-        android:text="88%"
         />
 </RelativeLayout>

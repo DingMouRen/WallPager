@@ -26,7 +26,7 @@
             android:layout_below="@+id/img"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:text="Wall Pager"
+            android:text="@string/app_name"
             android:textColor="@android:color/white"
             android:textSize="30sp"
             android:textStyle="bold"

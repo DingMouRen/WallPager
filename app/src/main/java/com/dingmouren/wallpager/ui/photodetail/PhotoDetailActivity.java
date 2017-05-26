@@ -1,5 +1,6 @@
 package com.dingmouren.wallpager.ui.photodetail;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
@@ -56,6 +57,7 @@ public class PhotoDetailActivity extends BaseActivity {
 
     }
 
+    @SuppressLint("CommitTransaction")
     @Override
     protected void onDestroy() {
         super.onDestroy();

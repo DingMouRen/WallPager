@@ -1,7 +1,9 @@
 package com.dingmouren.wallpager.ui.photodetail;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.WallpaperManager;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -109,8 +111,12 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
            mPhotoDetailPresenter.setWallPager();
         });
 
-        mAuthorHeader.setOnClickListener(v -> {
-
+        mTvShare.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_SEND);
+            intent.putExtra(Intent.EXTRA_TEXT, "http://a.app.qq.com/o/simple.jsp?pkgname=com.dingmouren.wallpager");
+            intent.setType("text/plain");
+            startActivity(Intent.createChooser(intent, "分享下载链接到"));
         });
     }
 
@@ -162,6 +168,7 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
      * 显示照片属性
      * @param photoInfo
      */
+    @SuppressLint("SetTextI18n")
     private void showPhotoAttr(PhotoInfo photoInfo) {
         mTvPhotoSize.setText("分辨率 : "+photoInfo.getWidth()+" / "+ photoInfo.getHeight());
         mTvPhotoExposure.setText("快门 : "+(photoInfo.getExif().getExposure_time() == null ? "未知":photoInfo.getExif().getExposure_time()));

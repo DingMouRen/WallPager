@@ -40,7 +40,7 @@
         >
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
 
         >
         <ImageView
@@ -72,7 +72,7 @@
             android:layout_marginTop="50dp"
             android:lineSpacingExtra="5dp"
             android:textSize="16sp"
-            android:text="     Wall Pager高清壁纸来自Unsplash，可以下载精美图片，将精彩图片设置为手机壁纸，或者使用侧边导航中的“壁纸设置（本地）”功能将手机相册中的精美图片设置成手机壁纸，也可以设置系统的锁屏壁纸。"
+            android:text="@string/about_content"
             />
         <TextView
             android:id="@+id/me"
@@ -81,14 +81,14 @@
             android:layout_below="@id/content"
             android:layout_marginTop="100dp"
             android:layout_centerHorizontal="true"
-            android:text="版权所有 @钉某人"
+            android:text="@string/about_copyright"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
-            android:text="github地址：https://github.com/DingMouRen"
+            android:text="@string/about_github"
             android:layout_below="@+id/me"
             />
     </RelativeLayout>

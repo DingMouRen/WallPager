@@ -16,6 +16,8 @@
 
 package com.dingmouren.wallpager.utils;
 
+import android.annotation.SuppressLint;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -24,7 +26,9 @@ import java.util.Date;
 /**
  * Create by h4de5ing 2016/5/7 007
  */
+@SuppressLint("SimpleDateFormat")
 public class DateUtils {
+
     public static final SimpleDateFormat DATE_FORMAT_DATETIME = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public static final SimpleDateFormat DATE_FORMAT_DATE = new SimpleDateFormat("yyyy-MM-dd");
     public static final SimpleDateFormat DATE_FORMAT_TIME = new SimpleDateFormat("HH:mm:ss");

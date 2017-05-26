@@ -14,9 +14,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.transition.ChangeImageTransform;
 import android.transition.Explode;
 import android.transition.Fade;
+import android.transition.Slide;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.base.BaseActivity;
@@ -41,14 +45,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private int mCurrentTabIndex;
     private int mIndex;
     private int mDrawerSelectedItem = -1;//记录侧滑菜单选中条目，是重新开启新Activity
-    private long mExitTime;
+    private long exitTime;
 
     @Override
     public void init() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Fade fade = new Fade();
-            fade.setDuration(800);
-            getWindow().setEnterTransition(fade);
+        if (Build.VERSION.SDK_INT >= 21){
+            Slide slide = new Slide();
+            slide.setSlideEdge(Gravity.BOTTOM);
+            slide.setDuration(800);
+            getWindow().setEnterTransition(slide);
         }
     }
 
@@ -196,5 +201,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void onDrawerStateChanged(int newState) {
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
+            if((System.currentTimeMillis()-exitTime) > 2000){
+                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

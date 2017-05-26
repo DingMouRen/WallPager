@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/ripple"
@@ -20,7 +21,7 @@
             android:background="@drawable/ripple"
             android:clickable="true"
             android:src="@drawable/arrow_back"
-            />
+            tools:ignore="RtlHardcoded"/>
 
       <!--  <ImageView
             android:id="@+id/img_menu"
@@ -105,7 +106,7 @@
                 android:drawablePadding="@dimen/activity_horizontal_margin"
                 android:drawableTop="@drawable/load_photo"
                 android:gravity="center"
-                android:text="下载"
+                android:text="@string/detail_load"
                 app:layout_widthPercent="33%"
                 />
 
@@ -120,9 +121,9 @@
                 android:drawablePadding="@dimen/activity_horizontal_margin"
                 android:drawableTop="@drawable/share"
                 android:gravity="center"
-                android:text="分享"
+                android:text="@string/detail_share"
                 app:layout_widthPercent="33%"
-                />
+                tools:ignore="RtlHardcoded"/>
 
             <TextView
                 android:id="@+id/tv_set_phone_page"
@@ -135,9 +136,9 @@
                 android:drawablePadding="@dimen/activity_horizontal_margin"
                 android:drawableTop="@drawable/set_phone_page"
                 android:gravity="center"
-                android:text="设为壁纸"
+                android:text="@string/detail_set_page"
                 app:layout_widthPercent="33%"
-                />
+                tools:ignore="RtlHardcoded"/>
 
         </android.support.percent.PercentRelativeLayout>
         <!--进度条-->
@@ -171,11 +172,11 @@
             android:orientation="vertical"
             android:layout_below="@+id/divide"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            >
+            tools:ignore="RtlHardcoded">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                android:text="照片属性"
+                android:text="@string/detail_photo_attr"
                 android:textSize="20sp"
                 android:clickable="true"
                 android:background="@drawable/ripple"

@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/logo"
-            android:text="Wall Pager"
+            android:text="@string/app_name"
             android:layout_centerHorizontal="true"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/appname"
-            android:text="给你最好的视觉体验"
+            android:text="@string/splash_desc"
             android:textSize="20sp"
             android:layout_centerHorizontal="true"
             />

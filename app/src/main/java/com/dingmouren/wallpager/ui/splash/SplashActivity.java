@@ -1,5 +1,9 @@
 package com.dingmouren.wallpager.ui.splash;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -7,6 +11,8 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Handler;
 import android.transition.Fade;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +29,7 @@ import butterknife.BindView;
 
 public class SplashActivity extends BaseActivity {
     @BindView(R.id.desc)   TextView mDesc;
+    @BindView(R.id.appname)   TextView mAppName;
     @BindView(R.id.logo) ImageView mImageView;
     @Override
     public void init() {
@@ -39,23 +46,27 @@ public class SplashActivity extends BaseActivity {
         return R.layout.activity_splash;
     }
 
+
     @Override
     public void initView() {
         AssetManager assetManager = getAssets();
         Typeface typeface = Typeface.createFromAsset(assetManager, "fonts/font_style1.ttf");
         mDesc.setTypeface(typeface);
-        mImageView.setOnClickListener(v -> {
+        new Handler().postDelayed(() -> {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class),     ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+                startActivity(new Intent(SplashActivity.this, MainActivity.class),     ActivityOptions.makeSceneTransitionAnimation(SplashActivity.this).toBundle());
+                delayFinish();
             }else {
                 startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                delayFinish();
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
             }
-        });
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-//            }
-//        },2000);
+        }, 1000);
     }
+
+    private void delayFinish(){
+        new Handler().postDelayed(()->finish(),1000);
+    }
+
 }

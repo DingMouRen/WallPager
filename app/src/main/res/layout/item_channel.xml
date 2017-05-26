@@ -4,7 +4,6 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:background="@color/accent_white"
-          android:text="新作"
           android:textSize="20sp"
           android:textStyle="bold"
           android:gravity="center"

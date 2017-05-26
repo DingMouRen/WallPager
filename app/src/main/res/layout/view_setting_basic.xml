@@ -11,7 +11,8 @@
         android:orientation="horizontal"
         android:paddingBottom="@dimen/sub_medium_spacing"
         android:paddingTop="@dimen/sub_medium_spacing"
-        android:paddingRight="@dimen/medium_spacing">
+        android:paddingRight="@dimen/medium_spacing"
+        tools:ignore="RtlSymmetry">
         <ImageView
             android:id="@+id/icon"
             android:layout_width="@dimen/icon_width_height"
