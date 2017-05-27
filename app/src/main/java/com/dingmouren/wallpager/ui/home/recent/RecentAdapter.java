@@ -106,8 +106,8 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
             }
 
             if (bean != null){
-                GlideImageLoader.loadImage(bean.getUser().getProfile_image().getMedium(),R.drawable.user_icon,authorHeader);
-                GlideImageLoader.loadAutoImage(bean.getUrls().getRegular(),0,imgPager);
+                    GlideImageLoader.loadImage(bean.getUser().getProfile_image().getMedium(), R.drawable.user_icon, authorHeader);
+                    GlideImageLoader.loadAutoImage(bean.getUrls().getRegular(), 0, imgPager);
                 authorName.setText(bean.getUser().getName());
                 authorLocation.setText(bean.getUser().getLocation());
             }
