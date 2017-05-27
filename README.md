@@ -1,5 +1,5 @@
 ![image](https://github.com/DingMouRen/WallPager/raw/master/imgs/img3.png)<br>
-### ![DownLoad](http://a.app.qq.com/o/simple.jsp?pkgname=com.dingmouren.wallpager)
+### ![DownLoad APK](http://a.app.qq.com/o/simple.jsp?pkgname=com.dingmouren.wallpager)
 
 ![image](https://github.com/DingMouRen/WallPager/raw/master/imgs/img1.png)<br>
 ![image](https://github.com/DingMouRen/WallPager/raw/master/imgs/img2.png)<br>
