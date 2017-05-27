@@ -44,7 +44,7 @@ public class MyApplication extends Application {
             SPUtil.put(this,Constant.COLOR_PRIMARY,getResources().getColor(R.color.md_teal_A400));
         }
         if (accentColor == 0){
-            SPUtil.put(this,Constant.COLOR_ACCENT,getResources().getColor(R.color.md_teal_A700));
+            SPUtil.put(this,Constant.COLOR_ACCENT,getResources().getColor(R.color.md_pink_A400));
         }
     }
 

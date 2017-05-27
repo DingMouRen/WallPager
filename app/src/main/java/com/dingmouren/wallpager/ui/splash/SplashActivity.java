@@ -61,7 +61,7 @@ public class SplashActivity extends BaseActivity {
         super.onEnterAnimationComplete();
         mContainer.animate()
                 .alpha(1)
-                .setDuration(500)
+                .setDuration(800)
                 .start();
     }
 

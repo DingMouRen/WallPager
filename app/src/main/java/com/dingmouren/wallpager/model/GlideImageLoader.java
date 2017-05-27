@@ -2,6 +2,7 @@ package com.dingmouren.wallpager.model;
 
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -62,18 +63,22 @@ public class GlideImageLoader  {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                         if (resource != null){
-                            imageView.setImageBitmap(zipBitmap(resource));
+                            imageView.setImageBitmap(zipBitmap(resource,imageView));
                         }
                     }
                 });
 
     }
 
-    private static Bitmap zipBitmap(Bitmap bitmap){
+    private static Bitmap zipBitmap(Bitmap bitmap,ImageView imageView){
+        ViewGroup.LayoutParams params = imageView.getLayoutParams();
         int reqWid = ScreenUtils.getScreenWidth(MyApplication.sContext);
         int rawWid = bitmap.getWidth();
         float scale = (float)reqWid / (float) rawWid;
         int reqHeight = (int)( bitmap.getHeight() * scale);
+        params.width = reqWid;
+        params.height = reqHeight;
+        imageView.setLayoutParams(params);
         return Bitmap.createScaledBitmap(bitmap,reqWid,reqHeight,true);
     }
 
