@@ -11,6 +11,16 @@
 ## 联系作者
 email:naildingmouren@gmail.com
 ##### 欢迎大家提宝贵建议
+## Introduction
+* The picture comes from the Unsplash site without copyright
+* Follow the Material Design design
+* Using the MVP architecture
+* High definition wallpaper with eight labels
+* Support mobile phone wallpaper and lock screen wallpaper
+* Download HD artwork
+## Contact author
+email:naildingmouren@gmail.com
+##### Your valuable suggestions are welcome
 ![image](https://github.com/DingMouRen/WallPager/raw/master/imgs/img1.png)<br>
 ![image](https://github.com/DingMouRen/WallPager/raw/master/imgs/img2.png)<br>
 ![image](https://github.com/DingMouRen/WallPager/raw/master/imgs/img5.png)<br>
