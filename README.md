@@ -1,6 +1,6 @@
 ![image](https://github.com/DingMouRen/WallPager/raw/master/imgs/img3.png)
 ![下载先体验](http://a.app.qq.com/o/simple.jsp?pkgname=com.dingmouren.wallpager)
-## ![English instructions](https://github.com/DingMouRen/WallPager/raw/master/file/english.md)
+## ![English instructions](https://github.com/DingMouRen/WallPager/raw/master/ENGLISH.md)
 ## 简介
 * 图片来自没有版权的Unsplash网站
 * 遵循Material Design设计
