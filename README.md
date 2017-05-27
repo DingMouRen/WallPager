@@ -1,6 +1,9 @@
 ![image](https://github.com/DingMouRen/WallPager/raw/master/imgs/img3.png)
 ![下载先体验](http://a.app.qq.com/o/simple.jsp?pkgname=com.dingmouren.wallpager)
-## ![English instructions](https://github.com/DingMouRen/WallPager/raw/master/ENGLISH.md)
+
+![image](https://github.com/DingMouRen/WallPager/raw/master/imgs/img1.png)<br>
+![image](https://github.com/DingMouRen/WallPager/raw/master/imgs/img2.png)<br>
+![image](https://github.com/DingMouRen/WallPager/raw/master/imgs/img5.png)<br>
 ## 简介
 * 图片来自没有版权的Unsplash网站
 * 遵循Material Design设计
@@ -21,9 +24,6 @@ email:naildingmouren@gmail.com
 ## Contact author
 email:naildingmouren@gmail.com
 ##### Your valuable suggestions are welcome
-![image](https://github.com/DingMouRen/WallPager/raw/master/imgs/img1.png)<br>
-![image](https://github.com/DingMouRen/WallPager/raw/master/imgs/img2.png)<br>
-![image](https://github.com/DingMouRen/WallPager/raw/master/imgs/img5.png)<br>
 ## License
 ```
 Copyright (C) 2017 WeyYe
