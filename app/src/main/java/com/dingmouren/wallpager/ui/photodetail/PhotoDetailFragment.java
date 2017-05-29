@@ -3,6 +3,7 @@ package com.dingmouren.wallpager.ui.photodetail;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.WallpaperManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -26,11 +27,11 @@ import com.dingmouren.wallpager.MyApplication;
 import com.dingmouren.wallpager.R;
 import com.dingmouren.wallpager.base.BaseFragment;
 import com.dingmouren.wallpager.event.LoadPhotoEvent;
-import com.dingmouren.wallpager.model.GlideImageLoader;
 import com.dingmouren.wallpager.model.bean.PhotoInfo;
 import com.dingmouren.wallpager.model.bean.UnsplashResult;
 import com.dingmouren.wallpager.service.PhotoLoadService;
 import com.dingmouren.wallpager.utils.DateUtils;
+import com.dingmouren.wallpager.utils.GlideHelper;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -94,8 +95,8 @@ public class PhotoDetailFragment extends BaseFragment implements PhotoInfoContra
 
     @Override
     public void initView() {
-        GlideImageLoader.loadAutoImage(mUnsplashResult.getUrls().getRegular(),0,mPhoto);
-        GlideImageLoader.loadImage(mUnsplashResult.getUser().getProfile_image().getLarge(),0,mAuthorHeader);
+        GlideHelper.loadImgAutoHeight(getContext(),mUnsplashResult.getUrls().getRegular(),0,0,mPhoto);
+        GlideHelper.loadImgSample(getContext(),mUnsplashResult.getUser().getProfile_image().getLarge(),0,0,mAuthorHeader);
         mAuthorName.setText(mUnsplashResult.getUser().getName());
         mCreatedTime.setText("拍摄于 "+ mUnsplashResult.getCreated_at().split("T")[0]);
     }

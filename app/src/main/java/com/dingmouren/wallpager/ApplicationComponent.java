@@ -3,7 +3,6 @@ package com.dingmouren.wallpager;
 import android.content.Context;
 
 import com.dingmouren.wallpager.api.Api;
-import com.dingmouren.wallpager.model.GlideImageLoader;
 
 import javax.inject.Singleton;
 
@@ -18,5 +17,4 @@ public interface ApplicationComponent {
     void inject(MyApplication myApplication);
     Context getApplicationContext();
     Api getApi();
-    GlideImageLoader getGlideImageLoader();
 }

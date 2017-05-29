@@ -33,6 +33,7 @@
         <activity
             android:name="com.dingmouren.wallpager.ui.MainActivity"
             android:launchMode="singleTask"
+            android:hardwareAccelerated="true"
             >
         </activity>
         <activity
@@ -72,6 +73,10 @@
             android:name="BUGLY_ENABLE_DEBUG"
             android:value="false" />
 
+
+        <!--Glide-->
+        <meta-data android:name="com.dingmouren.wallpager.utils.MyGlideModule"
+                   android:value="GlideModule"/>
     </application>
 
 </manifest>

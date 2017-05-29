@@ -29,6 +29,7 @@ import com.dingmouren.wallpager.ui.channelSort_unuse.ChannelManageFragment;
 import com.dingmouren.wallpager.ui.home.HomePageFragment;
 import com.dingmouren.wallpager.ui.photosloaded.PhotosLoadedActivity;
 import com.dingmouren.wallpager.ui.setting.SettingsActivity;
+import com.dingmouren.wallpager.utils.GlideHelper;
 import com.jiongbull.jlog.BuildConfig;
 
 import butterknife.BindView;

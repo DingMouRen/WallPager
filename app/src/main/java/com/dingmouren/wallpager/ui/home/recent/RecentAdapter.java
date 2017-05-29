@@ -12,12 +12,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.dingmouren.wallpager.MyApplication;
 import com.dingmouren.wallpager.R;
-import com.dingmouren.wallpager.model.GlideImageLoader;
 import com.dingmouren.wallpager.model.bean.UnsplashResult;
 import com.dingmouren.wallpager.ui.MainActivity;
 import com.dingmouren.wallpager.ui.photodetail.PhotoDetailActivity;
+import com.dingmouren.wallpager.utils.GlideHelper;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -106,8 +107,9 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.ViewHolder
             }
 
             if (bean != null){
-                    GlideImageLoader.loadImage(bean.getUser().getProfile_image().getMedium(), R.drawable.user_icon, authorHeader);
-                    GlideImageLoader.loadAutoImage(bean.getUrls().getRegular(), 0, imgPager);
+                GlideHelper.loadImgSample(mActivity,bean.getUser().getProfile_image().getMedium(), R.drawable.user_icon,0, authorHeader);
+                GlideHelper.loadImgAutoHeight(mActivity,bean.getUrls().getRegular(),R.drawable.imgtest,0, imgPager);
+                imgPager.setTag(bean.getUrls().getRegular());
                 authorName.setText(bean.getUser().getName());
                 authorLocation.setText(bean.getUser().getLocation());
             }
