@@ -16,7 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class ApiManager {
-    private static final int READ_TIME_OUT = 5;
+    private static final int READ_TIME_OUT = 15;
+    private static final int WRITE_TIME_OUT = 15;
     private static final int CONNECT_TIME_OUT = 15;
     private Api mApi;
     public static ApiManager sApiManager;
@@ -27,6 +28,8 @@ public class ApiManager {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
                 .connectTimeout(CONNECT_TIME_OUT,TimeUnit.SECONDS)
+                .writeTimeout(WRITE_TIME_OUT,TimeUnit.SECONDS)
+                .retryOnConnectionFailure(true)//重连
                 .addInterceptor(loggingInterceptor)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
